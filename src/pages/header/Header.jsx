@@ -13,7 +13,7 @@ export const Header = () => {
           <p className="uppercase text-xs"><span className="text-4xl text-gray-500 font-semibold md:text-3xl">Connect</span>with yor friends</p>
           <p className="uppercase text-xs"><span className="text-4xl text-gray-500 font-semibold md:text-3xl">Share</span>what you are thinking</p>
           <button onClick={() => navigate('/signup')} className="button-primary">Join Now</button>
-          <p className="text-sm">Already have an account? <span className="sign-up" onClick={() => navigate('/login')}>Log In</span></p>
+          <p className="text-sm mt-3">Already have an account? <span className="sign-up" onClick={() => navigate('/login')}>Log In</span></p>
         </div>
         <img src={header} alt="header" className="header w-96 xl:w-80 lg:w-64"  />
       </div>
