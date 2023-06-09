@@ -1,0 +1,12 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css");
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700;800&display=swap');
+
+body {
+  font-family: 'Fira Sans', sans-serif;
+}
+
+:root {
+  --primary-color: #377DFF;
+  --primary-dark: #0453e7;
+  --white-color: #FFFFFF;
+}
