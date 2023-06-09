@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import './Signup.css';
 
 export const Signup = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -7,8 +8,8 @@ export const Signup = () => {
 
   return (
     <>
-      <div className="w-96 m-auto sm:w-72">
-        <h1 className="text-3xl py-12 underline decoration-blue-400 font-bold text-center mb-8">
+      <div className="signup-container px-10 py-5 mt-16 w-96 m-auto sm:w-72">
+        <h1 className="text-3xl py-5 underline decoration-blue-400 font-bold text-center mb-8">
           Signup
         </h1>
         <form className="relative">
