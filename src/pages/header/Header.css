@@ -1,0 +1,27 @@
+.button-primary {
+  background-color: var(--primary-color);  
+  color: var(--white-color); 
+  padding: 7px;
+  font-size: 18px;
+  width: 280px;
+  margin-top: 90px;
+}
+
+.button-primary:hover {
+    background-color: var(--primary-dark);
+}
+
+.sign-up {
+    color: var(--primary-color);
+    cursor: pointer;
+}
+
+.sign-up:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 470px) {
+    .header {
+        width: 300px;
+    }
+}
