@@ -8,5 +8,7 @@ body {
 :root {
   --primary-color: #377DFF;
   --primary-dark: #0453e7;
+  --primary-darker: #566176;
+  --primary-lightest: #e8eefb;
   --white-color: #FFFFFF;
 }
