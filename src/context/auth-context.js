@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 import { authReducer } from "../reducer/auth-reducer";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router";
@@ -10,7 +10,7 @@ export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const localStorageItem = JSON.parse(localStorage.getItem("data"))
+  const localStorageItem = JSON.parse(localStorage.getItem("data"));
 
   const initialState = {
     user: {},
@@ -35,10 +35,10 @@ export const AuthProvider = ({ children }) => {
           "data",
           JSON.stringify({ user: data?.foundUser, token: data?.encodedToken })
         );
-        toast.success("Successfully Logged In!")
+        toast.success("Successfully Logged In!");
       }
     } catch (e) {
-      toast.error(e.response.data.errors[0])
+      toast.error(e.response.data.errors[0]);
     }
   };
 
@@ -57,20 +57,20 @@ export const AuthProvider = ({ children }) => {
           "data",
           JSON.stringify({ user: data?.createdUser, token: data?.encodedToken })
         );
-        toast.success("Successfully Logged In!")
+        toast.success("Successfully Logged In!");
       }
     } catch (e) {
-      toast.error(e.response.data.errors[0])
+      toast.error(e.response.data.errors[0]);
     }
   };
 
   useEffect(() => {
-    if(localStorageItem) {
-      authDispatch({type: "SET_USER", payload: localStorageItem?.user})
-      authDispatch({type: "SET_TOKEN", payload: localStorageItem?.token})
+    if (localStorageItem) {
+      authDispatch({ type: "SET_USER", payload: localStorageItem?.user });
+      authDispatch({ type: "SET_TOKEN", payload: localStorageItem?.token });
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const userLogout = () => {
     authDispatch({ type: "SET_USER", payload: {} });
