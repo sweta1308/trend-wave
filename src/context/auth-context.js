@@ -76,6 +76,7 @@ export const AuthProvider = ({ children }) => {
     authDispatch({ type: "SET_USER", payload: {} });
     authDispatch({ type: "SET_TOKEN", payload: "" });
     localStorage.removeItem("data");
+    toast.success("Logged Out!");
   };
 
   return (
