@@ -1,5 +1,5 @@
 import { formatDate } from "../utils/authUtils";
-import { attireBanner, blackDress, post } from "../../assets";
+import { attireBanner, blackDress, girlImage, post } from "../../assets";
 
 /**
  * Posts can be added here.
@@ -29,6 +29,21 @@ export const posts = [
     ],
     username: "adarshbalika",
     createdAt: "2023-02-16T10:55:06+05:30",
+    updatedAt: formatDate(),
+  },
+
+  {
+    _id: "kjsjnwkk_i83k_oisj3_9ekknwe8",
+    content: "Follow the trend lines, not the headlines...✌️",
+    imageUrl: '',
+    likes: {
+      likeCount: 4,
+      likedBy: [],
+      dislikedBy: [],
+    },
+    comments: [],
+    username: "scottward",
+    createdAt: "2021-03-07T10:15:23+05:30",
     updatedAt: formatDate(),
   },
 
@@ -115,7 +130,15 @@ export const posts = [
       likedBy: [],
       dislikedBy: [],
     },
-    comments: [],
+    comments: [{
+      _id: "kjndjjeoj_3ije_ksjo_skjo2j9",
+      username: "julieevans",
+      text: "Looking fab!",
+      votes: {
+        upvotedBy: [],
+        downvotedBy: [],
+      },
+    },],
     username: "janedoe",
     createdAt: "2023-06-01T10:55:01+18:30",
     updatedAt: formatDate(),
@@ -163,7 +186,7 @@ export const posts = [
     comments: [
       {
         _id: "ismsppxeo_983j_83jd_knskne48",
-        username: "janedoe",
+        username: "scottward",
         text: "True",
         votes: {
           upvotedBy: [],
@@ -173,6 +196,55 @@ export const posts = [
     ],
     username: "aryajoshi",
     createdAt: "2022-04-18T10:15:23+05:30",
+    updatedAt: formatDate(),
+  },
+
+  {
+    _id: "kjsnihwuo_83uj_kjan_1awknsoj",
+    content: "Looking good isn’t self-importance; it’s self-respect.",
+    imageUrl: '',
+    likes: {
+      likeCount: 19,
+      likedBy: [],
+      dislikedBy: [],
+    },
+    comments: [],
+    username: "swetaagarwal",
+    createdAt: "2021-05-01T10:15:23+05:30",
+    updatedAt: formatDate(),
+  },
+
+  {
+    _id: "jeisdihie8_83ije_83i8_kdknkejojo9",
+    content: "Just grateful, ready for the next and the next and the next...✨",
+    imageUrl: girlImage,
+    likes: {
+      likeCount: 45,
+      likedBy: [],
+      dislikedBy: [],
+    },
+    comments: [
+      {
+        _id: "jsihwi29_82u8_js28_mkjsoioj29",
+        username: "johndoe",
+        text: "🔥 caption",
+        votes: {
+          upvotedBy: [],
+          downvotedBy: [],
+        },
+      },
+      {
+        _id: "jsdjeips_9299_9wj2_ksnkj2oj9",
+        username: "scottward",
+        text: "Awesome😊",
+        votes: {
+          upvotedBy: [],
+          downvotedBy: [],
+        },
+      },
+    ],
+    username: "julieevans",
+    createdAt: "2023-11-27T10:15:23+05:30",
     updatedAt: formatDate(),
   },
 ];
