@@ -98,6 +98,7 @@ export const Login = () => {
               onClick={(e) => {
                 e.preventDefault();
                 setUserLoginDetails(guestUserLoginDetails);
+                userLogin(guestUserLoginDetails);
               }}
               className="guest-submit py-2 cursor-pointer text-md text-primary-color border-x border-y border-primary-color w-full hover:bg-primary-color hover:text-white hover:transition-colors hover:duration-200 hover:ease-in-out"
             >
