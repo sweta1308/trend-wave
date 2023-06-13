@@ -11,6 +11,7 @@ import Mockman from "mockman-js";
 import { Explore } from "./pages/Explore";
 import { Profile } from "./pages/Profile";
 import { Bookmark } from "./pages/Bookmark";
+import { PostDetails } from "./pages/PostDetails";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route element={<RequireAuth />}>
           <Route path="/" element={<Home />} />
           <Route path="/explore" element={<Explore />} />
+          <Route path="/post/:postID" element={<PostDetails />} />
           <Route path="/bookmark" element={<Bookmark />} />
           <Route path="/profile" element={<Profile />} />
         </Route>
