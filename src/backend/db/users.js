@@ -42,6 +42,7 @@ export const users = [
     bookmarks: [],
   },
 
+
   {
     _id: "ksjiojiks_83je_jknsih388",
     firstName: "John",
@@ -50,6 +51,20 @@ export const users = [
     password: "john1234",
     bio: "Be limitless",
     avatarUrl: boyAvatar1,
+    website: "",
+    createdAt: formatDate(),
+    updatedAt: formatDate(),
+    bookmarks: [],
+  },
+
+  {
+    _id: "jhshiwuui_82js_kjnsjn2us",
+    firstName: "Julie",
+    lastName: "Evans",
+    username: "julieevans",
+    password: "julie@789",
+    bio: "Happy Summer!",
+    avatarUrl: girlAvatar4,
     website: "",
     createdAt: formatDate(),
     updatedAt: formatDate(),
@@ -92,20 +107,6 @@ export const users = [
     password: "ward2022",
     bio: "Wev Developer",
     avatarUrl: boyAvatar3,
-    website: "",
-    createdAt: formatDate(),
-    updatedAt: formatDate(),
-    bookmarks: [],
-  },
-
-  {
-    _id: "jhshiwuui_82js_kjnsjn2us",
-    firstName: "Julie",
-    lastName: "Evans",
-    username: "julieevans",
-    password: "julie@789",
-    bio: "Happy Summer!",
-    avatarUrl: girlAvatar4,
     website: "",
     createdAt: formatDate(),
     updatedAt: formatDate(),
