@@ -122,7 +122,7 @@ export const posts = [
   },
 
   {
-    _id: "owjin3jj9_o223_ke93_kskoi3os",
+    _id: "smzoeo90_i822_msk3_ksmo392k",
     content: "Timeless wardrobe favourite <3.",
     imageUrl: post,
     likes: {
