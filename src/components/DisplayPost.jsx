@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useUser } from "../context/user-context";
 import { useEffect } from "react";
+import { useNavigate } from "react-router";
 
 export const DisplayPost = ({ userPost }) => {
   const { _id, content, imageUrl, likes, comments, username, createdAt } =
     userPost;
+  const navigate = useNavigate();
 
   const { userState } = useUser();
   const [userDetails, setUserDetails] = useState({});
@@ -16,7 +18,7 @@ export const DisplayPost = ({ userPost }) => {
   return (
     <div
       key={_id}
-      className="w-[500px] p-5 bg-white my-2 rounded-xl md:w-[350px] xs:w-[280px]"
+      className="w-[500px] p-5 bg-white my-2 rounded-xl md:w-[350px] xs:w-[320px]"
     >
       <div className="flex items-center justify-between">
         <div className="flex">
@@ -26,7 +28,7 @@ export const DisplayPost = ({ userPost }) => {
             className="w-[40px] h-[40px] mr-2 bg-primary-color rounded-full"
           />
           <div>
-            <h1 className="font-bold">{`${userDetails.firstName} ${userDetails.lastName}`}</h1>
+            <h1 className="font-bold">{`${userDetails?.firstName} ${userDetails?.lastName}`}</h1>
             <p className="text-xs">{` ${new Date(createdAt)
               .toDateString()
               .split(" ")
@@ -36,20 +38,23 @@ export const DisplayPost = ({ userPost }) => {
         </div>
         <i className="fa-solid fa-ellipsis cursor-pointer"></i>
       </div>
-      <p className="pt-5 pb-3">{content}</p>
-      {imageUrl && (
-        <img
-          className="w-[500px] rounded-xl md:w-[350px] xs:w-[280px]"
-          src={imageUrl}
-          alt="uploads"
-        />
-      )}
+      <div className="cursor-pointer" onClick={() => navigate(`/post/${_id}`)}>
+        <p className="pt-5 pb-3">{content}</p>
+        {imageUrl && (
+          <img
+            className="w-[500px] rounded-xl md:w-[350px] xs:w-[280px]"
+            src={imageUrl}
+            alt="uploads"
+          />
+        )}
+      </div>
+
       <div className="w-[150px] text-[15px] my-3 text-gray-text flex justify-between">
-        <p>{likes.likeCount} Likes</p>
+        <p>{likes?.likeCount} Likes</p>
         <p>
-          {comments.length > 0 &&
-            comments.length +
-              `${comments.length === 1 ? " Comment" : " Comments"}`}
+          {comments?.length > 0 &&
+            comments?.length +
+              `${comments?.length === 1 ? " Comment" : " Comments"}`}
         </p>
       </div>
 
