@@ -2,18 +2,26 @@ import { useState } from "react";
 import { useUser } from "../context/user-context";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
+import { usePost } from "../context/post-context";
+import { useAuth } from "../context/auth-context";
 
 export const DisplayPost = ({ userPost }) => {
   const { _id, content, imageUrl, likes, comments, username, createdAt } =
     userPost;
   const navigate = useNavigate();
-
+  const { authState } = useAuth();
+  const { getUserPost, likePost, dislikePost } = usePost();
   const { userState } = useUser();
   const [userDetails, setUserDetails] = useState({});
+
   useEffect(() => {
     setUserDetails(userState.find((user) => user.username === username));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const likedByUser = () =>
+    userPost?.likes?.likedBy.filter((user) => user._id === authState?.user?._id)
+      .length !== 0;
 
   return (
     <div
@@ -21,7 +29,13 @@ export const DisplayPost = ({ userPost }) => {
       className="w-[500px] p-5 bg-white my-2 rounded-xl md:w-[350px] xs:w-[320px]"
     >
       <div className="flex items-center justify-between">
-        <div className="flex">
+        <div
+          className="flex cursor-pointer"
+          onClick={() => {
+            getUserPost(userDetails?.username);
+            navigate(`/profile/${username}`);
+          }}
+        >
           <img
             src={userDetails?.avatarUrl}
             alt="avatar"
@@ -61,8 +75,22 @@ export const DisplayPost = ({ userPost }) => {
       <hr />
 
       <div className="my-3 text-[15px] flex justify-between">
-        <div className="cursor-pointer">
-          <i class="fa-regular fa-heart"></i> <span>Like</span>
+        <div
+          className="cursor-pointer"
+          onClick={() => {
+            likedByUser() ? dislikePost(_id) : likePost(_id);
+          }}
+        >
+          {likedByUser() ? (
+            <div>
+              <i className="fa-solid fa-heart" style={{ color: "#377dff" }}></i>{" "}
+              <span className="text-primary-color">Liked</span>
+            </div>
+          ) : (
+            <div>
+              <i className="fa-regular fa-heart"></i> <span>Like</span>
+            </div>
+          )}
         </div>
         <div className="cursor-pointer">
           <i class="fa-regular fa-comment"></i> <span>Comment</span>
