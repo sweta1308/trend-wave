@@ -28,15 +28,47 @@ export const UserProvider = ({ children }) => {
     }
   };
 
-  useEffect(() => {
-    if (authState.token) {
-      getUserData();
+  const followUser = async (userId) => {
+    try {
+      const { data, status } = await axios({
+        method: "POST",
+        url: `/api/users/follow/${userId}`,
+        headers: { authorization: authState?.token },
+      });
+      if (status === 200 || status === 201) {
+        userDispatch({ type: "UPDATE_USERDATA", payload: data?.followUser });
+        userDispatch({ type: "UPDATE_USERDATA", payload: data?.user });
+      }
+    } catch (e) {
+      console.log(e);
     }
-  }, [authState.token]);
+  };
+
+  const unfollowUser = async (userId) => {
+    try {
+      const { data, status } = await axios({
+        method: "POST",
+        url: `/api/users/unfollow/${userId}`,
+        headers: { authorization: authState?.token },
+      });
+      if (status === 200 || status === 201) {
+        userDispatch({ type: "UPDATE_USERDATA", payload: data?.followUser });
+        userDispatch({ type: "UPDATE_USERDATA", payload: data?.user });
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    getUserData();
+  }, []);
 
   return (
     <>
-      <UserContext.Provider value={{ userState, userLoading }}>
+      <UserContext.Provider
+        value={{ userState, userLoading, followUser, unfollowUser }}
+      >
         {children}
       </UserContext.Provider>
     </>
