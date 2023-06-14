@@ -23,9 +23,8 @@ export const users = [
     bio: "I love myself!",
     avatarUrl: girlAvatar1,
     website: "https://swetaagarwalla.netlify.app/",
-    createdAt: formatDate(),
+    createdAt: "2023-06-07T10:10:22+05:30",
     updatedAt: formatDate(),
-    bookmarks: [],
   },
 
   {
@@ -37,9 +36,8 @@ export const users = [
     bio: "Be yourself!",
     avatarUrl: girlAvatar2,
     website: "https://swetaagarwalla.netlify.app/",
-    createdAt: formatDate(),
+    createdAt: "2022-10-24T10:15:08+05:30",
     updatedAt: formatDate(),
-    bookmarks: [],
   },
 
 
@@ -52,9 +50,8 @@ export const users = [
     bio: "Be limitless",
     avatarUrl: boyAvatar1,
     website: "",
-    createdAt: formatDate(),
+    createdAt: "2023-01-12T10:52:14+05:30",
     updatedAt: formatDate(),
-    bookmarks: [],
   },
 
   {
@@ -66,9 +63,8 @@ export const users = [
     bio: "Happy Summer!",
     avatarUrl: girlAvatar4,
     website: "",
-    createdAt: formatDate(),
+    createdAt: "2021-03-25T10:43:09+05:30",
     updatedAt: formatDate(),
-    bookmarks: [],
   },
 
   {
@@ -80,9 +76,8 @@ export const users = [
     bio: "Hello everyone!",
     avatarUrl: boyAvatar2,
     website: "",
-    createdAt: formatDate(),
+    createdAt: "2022-07-10T10:15:23+05:30",
     updatedAt: formatDate(),
-    bookmarks: [],
   },
 
   {
@@ -94,9 +89,8 @@ export const users = [
     bio: "Freelancer",
     avatarUrl: girlAvatar3,
     website: "https://swetaagarwalla.netlify.app/",
-    createdAt: formatDate(),
+    createdAt: "2023-09-02T10:28:18+05:30",
     updatedAt: formatDate(),
-    bookmarks: [],
   },
 
   {
@@ -108,8 +102,7 @@ export const users = [
     bio: "Wev Developer",
     avatarUrl: boyAvatar3,
     website: "",
-    createdAt: formatDate(),
+    createdAt: "2021-11-07T10:01:23+05:30",
     updatedAt: formatDate(),
-    bookmarks: [],
   },
 ];
