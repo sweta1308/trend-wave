@@ -14,6 +14,7 @@ export const Signup = () => {
     email: "",
     username: "",
     password: "",
+    avatarUrl: "",
   });
 
   const signupSubmitHandler = (e) => {
