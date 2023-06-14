@@ -1,13 +1,14 @@
 import { useState } from "react";
+import axios from "axios";
 import PulseLoader from "react-spinners/PulseLoader";
-import { useParams } from "react-router";
-import { getPost } from "../utils/get-post";
+import { useNavigate, useParams } from "react-router";
 import { useEffect } from "react";
 import { Navbar } from "../components/Navbar";
 import { Sidenav } from "../components/Sidenav";
 import { RightNav } from "../components/RightNav";
 import { DisplayPost } from "../components/DisplayPost";
 import { useUser } from "../context/user-context";
+import { usePost } from "../context/post-context";
 
 export const PostDetails = () => {
   document.title = "Trend Wave | Post details";
@@ -15,13 +16,20 @@ export const PostDetails = () => {
   const [postLoading, setPostLoading] = useState(false);
   const { postID } = useParams();
   const { userState } = useUser();
+  const navigate = useNavigate();
+  const { getUserPost } = usePost();
 
   const getPostDetails = async () => {
     try {
       setPostLoading(true);
-      const post = await getPost(postID);
-      setPostDetails(post?.post);
-      setPostLoading(false);
+      const { data, status } = await axios({
+        method: "GET",
+        url: `/api/posts/${postID}`,
+      });
+      if (status === 200 || status === 201) {
+        setPostDetails(data?.post);
+        setPostLoading(false);
+      }
     } catch (e) {
       console.log(e);
     }
@@ -47,14 +55,23 @@ export const PostDetails = () => {
             <div>
               <DisplayPost userPost={postDetails} />
               {postDetails?.comments?.length > 0 ? (
-                <div>
+                <div className="my-2 rounded-xl text-[13px]">
                   {postDetails?.comments?.map((comment) => {
                     const userComment = userState?.find(
                       (user) => user?.username === comment?.username
                     );
                     return (
-                      <div key={comment?._id} className="bg-white rounded-xl px-5 py-3 my-2">
-                        <div className="flex">
+                      <div
+                        key={comment?._id}
+                        className="bg-white px-5 py-px pt-2"
+                      >
+                        <div
+                          className="flex cursor-pointer"
+                          onClick={() => {
+                            getUserPost(userComment?.username);
+                            navigate(`/profile/${userComment?.username}`);
+                          }}
+                        >
                           <img
                             src={userComment.avatarUrl}
                             alt="avatar"
@@ -65,7 +82,7 @@ export const PostDetails = () => {
                             <p className="text-xs">@{userComment?.username}</p>
                           </div>
                         </div>
-                        <p className="my-3">{comment?.text}</p>
+                        <p className="my-2">{comment?.text}</p>
                       </div>
                     );
                   })}
