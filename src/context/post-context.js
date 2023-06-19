@@ -57,6 +57,7 @@ export const PostProvider = ({ children }) => {
       });
       if (status === 200 || status === 201) {
         postDispatch({ type: "GET_POST", payload: data?.posts });
+        return data.posts.find(post => post._id === postId);
       }
     } catch (e) {
       console.log(e);
@@ -78,6 +79,22 @@ export const PostProvider = ({ children }) => {
     }
   };
 
+  const deletePost = async (postId) => {
+    try {
+      const { data, status } = await axios({
+        method: "DELETE",
+        url: `api/posts/${postId}`,
+        headers: { authorization: authState?.token },
+      });
+      if (status === 200 || status === 201) {
+        console.log("Hi")
+        postDispatch({ type: "GET_POST", payload: data?.posts });
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   useEffect(() => {
     if (authState.token) {
       getPostData();
@@ -86,7 +103,7 @@ export const PostProvider = ({ children }) => {
 
   return (
     <PostContext.Provider
-      value={{ postState, getUserPost, likePost, dislikePost }}
+      value={{ postState, getUserPost, likePost, dislikePost, deletePost }}
     >
       {children}
     </PostContext.Provider>
