@@ -83,7 +83,7 @@ export const PostProvider = ({ children }) => {
     try {
       const { data, status } = await axios({
         method: "DELETE",
-        url: `api/posts/${postId}`,
+        url: `/api/posts/${postId}`,
         headers: { authorization: authState?.token },
       });
       if (status === 200 || status === 201) {
