@@ -8,6 +8,7 @@ import App from "./App";
 import { AuthProvider } from "./context/auth-context";
 import { PostProvider } from "./context/post-context";
 import { UserProvider } from "./context/user-context";
+import { BookmarkProvider } from "./context/bookmark-context";
 
 // Call make Server
 makeServer();
@@ -19,7 +20,9 @@ root.render(
       <AuthProvider>
         <PostProvider>
           <UserProvider>
-            <App />
+            <BookmarkProvider>
+              <App />
+            </BookmarkProvider>
           </UserProvider>
         </PostProvider>
       </AuthProvider>
