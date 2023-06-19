@@ -1,8 +1,10 @@
 import { useAuth } from "../context/auth-context";
 import { NavLink } from "react-router-dom";
+import { useBookmark } from "../context/bookmark-context";
 
 export const Sidenav = () => {
   const { userLogout } = useAuth();
+  const { bookmarkState } = useBookmark();
 
   const getStyles = ({ isActive }) => ({
     backgroundColor: isActive ? "#377dff" : "white",
@@ -35,7 +37,11 @@ export const Sidenav = () => {
           to="/bookmark"
         >
           <i className="fa-regular fa-bookmark md:text-base"></i>{" "}
-          <span className="ml-3 font-medium md:block md:ml-0">Bookmarks</span>
+          <span className="ml-3 font-medium md:block md:ml-0">
+            Bookmarks{" "}
+            {bookmarkState?.bookmark?.length > 0 &&
+              `(${bookmarkState?.bookmark?.length})`}
+          </span>
         </NavLink>
         <p
           className="block py-2 cursor-pointer md:px-5 xs:px-2 hover:text-primary-color pl-10 xl:pl-5 md:text-xs"
