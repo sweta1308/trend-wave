@@ -17,7 +17,7 @@ export const PostDetails = () => {
   const { postID } = useParams();
   const { userState } = useUser();
   const navigate = useNavigate();
-  const { getUserPost } = usePost();
+  const { getUserPost, postState } = usePost();
 
   const getPostDetails = async () => {
     try {
@@ -38,7 +38,7 @@ export const PostDetails = () => {
   useEffect(() => {
     getPostDetails();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [postState.post]);
 
   return (
     <>
