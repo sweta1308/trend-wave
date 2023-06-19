@@ -4,37 +4,49 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router";
 import { usePost } from "../context/post-context";
 import { useAuth } from "../context/auth-context";
+import { useBookmark } from "../context/bookmark-context";
+import { EditDeleteModal } from "./EditDeleteModal";
 
 export const DisplayPost = ({ userPost }) => {
   const { _id, content, imageUrl, likes, comments, username, createdAt } =
     userPost;
   const navigate = useNavigate();
   const { authState } = useAuth();
-  const { getUserPost, likePost, dislikePost } = usePost();
+  const { likePost, dislikePost, deletePost } = usePost();
   const { userState } = useUser();
+  const { addBookmarkData, bookmarkState, removeBookmark } = useBookmark();
   const [userDetails, setUserDetails] = useState({});
+  const [isModalvisible, setIsModalVisible] = useState(false);
 
   useEffect(() => {
     setUserDetails(userState.find((user) => user.username === username));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [username, userState]);
 
   const likedByUser = () =>
     userPost?.likes?.likedBy.filter((user) => user._id === authState?.user?._id)
       .length !== 0;
 
+  const toggleLikeHandler = () => {
+    if (likedByUser()) {
+      dislikePost(_id);
+    } else {
+      likePost(_id);
+    }
+  };
+
+  const bookmarkedByUser = () =>
+    bookmarkState?.bookmark?.filter((postId) => postId === _id)?.length !== 0;
+
   return (
     <div
       key={_id}
-      className="w-[500px] p-5 bg-white my-2 rounded-xl md:w-[350px] xs:w-[320px]"
+      className="w-[500px] relative p-5 bg-white my-2 rounded-xl md:w-[350px] xs:w-[320px]"
     >
       <div className="flex items-center justify-between">
         <div
           className="flex cursor-pointer"
-          onClick={() => {
-            getUserPost(userDetails?.username);
-            navigate(`/profile/${username}`);
-          }}
+          onClick={() => navigate(`/profile/${username}`)}
         >
           <img
             src={userDetails?.avatarUrl}
@@ -50,8 +62,23 @@ export const DisplayPost = ({ userPost }) => {
               .join(" ")}`}</p>
           </div>
         </div>
-        <i className="fa-solid fa-ellipsis cursor-pointer"></i>
+        {authState?.user?.username === username && (
+          <i
+            onClick={() => setIsModalVisible((prev) => !prev)}
+            className="fa-solid fa-ellipsis cursor-pointer"
+          ></i>
+        )}
       </div>
+
+      {isModalvisible && userPost ? (
+        <EditDeleteModal
+          deletePost={() => {
+            deletePost(_id);
+            setIsModalVisible(false);
+          }}
+        />
+      ) : null}
+
       <div className="cursor-pointer" onClick={() => navigate(`/post/${_id}`)}>
         <p className="pt-5 pb-3">{content}</p>
         {imageUrl && (
@@ -75,12 +102,7 @@ export const DisplayPost = ({ userPost }) => {
       <hr />
 
       <div className="my-3 text-[15px] flex justify-between">
-        <div
-          className="cursor-pointer"
-          onClick={() => {
-            likedByUser() ? dislikePost(_id) : likePost(_id);
-          }}
-        >
+        <div className="cursor-pointer" onClick={toggleLikeHandler}>
           {likedByUser() ? (
             <div>
               <i className="fa-solid fa-heart" style={{ color: "#377dff" }}></i>{" "}
@@ -92,12 +114,20 @@ export const DisplayPost = ({ userPost }) => {
             </div>
           )}
         </div>
+
         <div className="cursor-pointer">
           <i class="fa-regular fa-comment"></i> <span>Comment</span>
         </div>
-        <div className="cursor-pointer">
-          <i class="fa-regular fa-bookmark"></i> <span>Bookmark</span>
-        </div>
+
+        {bookmarkedByUser() ? (
+          <div className="cursor-pointer" onClick={() => removeBookmark(_id)}>
+            <i class="fa-solid fa-bookmark"></i> <span>Bookmarked</span>
+          </div>
+        ) : (
+          <div className="cursor-pointer" onClick={() => addBookmarkData(_id)}>
+            <i class="fa-regular fa-bookmark"></i> <span>Bookmark</span>
+          </div>
+        )}
       </div>
 
       <hr />
