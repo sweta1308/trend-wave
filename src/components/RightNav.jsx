@@ -25,7 +25,7 @@ export const RightNav = () => {
         <BeatLoader color="var(--primary-color)" size={10} />
       ) : (
         userState?.slice(0, 5)?.map((user) => (
-          <div>
+          <div key={user._id}>
             {user?.username !== authState?.user?.username ? (
               <div className="flex flex-col my-4">
                 <div
@@ -49,22 +49,18 @@ export const RightNav = () => {
                 {isFollowed(user?._id) ? (
                   <button
                     onClick={() => unfollowUser(user?._id)}
-                    className="bg-primary-color text-white rounded-md cursor-pointer text-sm py-[5px] hover:bg-primary-dark my-2"
+                    className="text-primary-color border-2 border-primary-color rounded-md cursor-pointer text-sm py-[5px] hover:bg-primary-color hover:text-white my-2"
                   >
                     Following
                   </button>
                 ) : (
                   <button
                     onClick={() => followUser(user?._id)}
-                    className="bg-primary-color text-white rounded-md cursor-pointer text-sm py-[5px] hover:bg-primary-dark my-2"
+                    className="bg-primary-color text-white border-2 border-primary-color rounded-md cursor-pointer text-sm py-[5px] hover:bg-primary-dark my-2"
                   >
                     <i className="fa-solid fa-plus fa-xs"></i> Follow
                   </button>
                 )}
-
-                {/* <button onClick={() => followUser(user?._id)} className="bg-primary-color text-white rounded-md cursor-pointer text-sm py-[5px] hover:bg-primary-dark my-2">
-                  <i className="fa-solid fa-plus fa-xs"></i> Follow
-                </button> */}
               </div>
             ) : null}
           </div>
