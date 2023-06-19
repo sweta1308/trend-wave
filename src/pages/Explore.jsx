@@ -4,10 +4,16 @@ import { usePost } from "../context/post-context";
 import { DisplayPost } from "../components/DisplayPost";
 import PulseLoader from "react-spinners/PulseLoader";
 import { RightNav } from "../components/RightNav";
+import { useAuth } from "../context/auth-context";
 
 export const Explore = () => {
   document.title = "Trend Wave | Explore";
   const { postState } = usePost();
+  const { authState } = useAuth();
+
+  const exploreData = postState?.post?.filter(
+    (data) => data?.username !== authState?.user?.username
+  );
 
   return (
     <>
@@ -18,8 +24,8 @@ export const Explore = () => {
           {postState.postLoading && (
             <PulseLoader color="var(--primary-color)" size={30} />
           )}
-          {postState?.post?.map((posts) => (
-            <div>
+          {exploreData?.map((posts) => (
+            <div key={posts._id}>
               <DisplayPost userPost={posts} />
             </div>
           ))}
