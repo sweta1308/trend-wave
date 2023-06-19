@@ -15,8 +15,8 @@ export const Profile = () => {
   document.title = "Trend Wave | Profile";
   const { username } = useParams();
   const { authState } = useAuth();
-  const { postState } = usePost();
-  const { followUser } = useUser();
+  const { postState, getUserPost } = usePost();
+  const { userState, followUser, unfollowUser } = useUser();
   const [userData, setUserData] = useState({});
   const [dataLoading, setDataLoading] = useState(false);
 
@@ -30,6 +30,7 @@ export const Profile = () => {
       if (status === 200 || status === 201) {
         setUserData(data?.user);
         setDataLoading(false);
+        getUserPost(username);
       }
     } catch (e) {
       console.log(e);
@@ -39,7 +40,12 @@ export const Profile = () => {
   useEffect(() => {
     getUserDetails();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [username]);
+  }, [username, postState.post, userState]);
+
+  const isFollowed = (userId) =>
+    userState
+      ?.find((user) => user._id === userId)
+      ?.followers.some((user) => user._id === authState?.user?._id);
 
   return (
     <>
@@ -75,9 +81,19 @@ export const Profile = () => {
                   <button className="px-4 py-2 hover:text-primary-color rounded-lg">
                     <i className="fa-solid fa-pen fa-md"></i>
                   </button>
+                ) : isFollowed(userData?._id) ? (
+                  <button
+                    onClick={() => unfollowUser(userData?._id)}
+                    className=" text-primary-color border-2 border-primary-color text-sm px-4 py-2 hover:bg-primary-color hover:text-white rounded-lg"
+                  >
+                    Following
+                  </button>
                 ) : (
-                  <button onClick={() => followUser(userData?._id)} className="bg-primary-color text-white text-sm px-4 py-2 hover:bg-primary-dark rounded-lg">
-                    Follow
+                  <button
+                    onClick={() => followUser(userData?._id)}
+                    className="bg-primary-color text-white text-sm px-4 py-2 hover:bg-primary-dark rounded-lg"
+                  >
+                    <i className="fa-solid fa-plus fa-xs"></i> Follow
                   </button>
                 )}
               </div>
