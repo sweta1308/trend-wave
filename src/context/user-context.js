@@ -60,6 +60,18 @@ export const UserProvider = ({ children }) => {
     }
   };
 
+  // const editUserDetails = async () => {
+  //   try {
+  //     const {data, status} = await axios({
+  //       method: "POST",
+  //       url: "/api/users/edit",
+  //       headers: { authorization: authState?.token },
+  //     })
+  //   } catch (e) {
+  //     console.log(e)
+  //   }
+  // }
+
   useEffect(() => {
     getUserData();
   }, []);
