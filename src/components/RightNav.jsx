@@ -27,7 +27,7 @@ export const RightNav = () => {
         userState?.slice(0, 5)?.map((user) => (
           <div key={user._id}>
             {user?.username !== authState?.user?.username ? (
-              <div className="flex flex-col my-4">
+              <div key={user?._id} className="flex flex-col my-4">
                 <div
                   onClick={() => {
                     getUserPost(user?.username);
