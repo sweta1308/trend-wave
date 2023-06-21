@@ -1,10 +1,37 @@
+import PulseLoader from "react-spinners/PulseLoader";
 import { Navbar } from "../components/Navbar";
 import { NewPost } from "../components/NewPost";
 import { RightNav } from "../components/RightNav";
 import { Sidenav } from "../components/Sidenav";
+import { useAuth } from "../context/auth-context";
+import { usePost } from "../context/post-context";
+import { useUser } from "../context/user-context";
+import { DisplayPost } from "../components/DisplayPost";
 
 export const Home = () => {
   document.title = "Trend Wave | Feed";
+  const { postState } = usePost();
+  const { userState } = useUser();
+  const { authState } = useAuth();
+  let userFeed = [];
+  const loggedInUser = userState?.find(
+    ({ _id }) => _id === authState?.user?._id
+  );
+  const followFeedPost = postState?.post?.filter(({ username }) => {
+    const followUsernameArr = loggedInUser?.following?.map(
+      ({ username }) => username
+    );
+    return followUsernameArr?.includes(username);
+  });
+  userFeed = [
+    ...userFeed,
+    ...followFeedPost,
+    ...postState?.post?.filter(
+      ({ username }) => username === loggedInUser?.username
+    ),
+  ];
+
+  console.log(userFeed);
   return (
     <>
       <Navbar />
@@ -12,6 +39,16 @@ export const Home = () => {
         <Sidenav />
         <div className="py-5 mx-5 relative left-[15%] w-[65%] flex flex-col items-center bg-primary-lightest rounded-xl lg:left-[30%] lg:w-[65%] md:left-0 md:w-full md:pb-[110px]">
           <NewPost />
+          {postState.postLoading && (
+            <PulseLoader color="var(--primary-color)" size={30} />
+          )}
+          <div className="mt-[30px]">
+          {userFeed?.map((posts) => (
+            <div key={posts._id}>
+              <DisplayPost userPost={posts} />
+            </div>
+          ))}
+          </div>
         </div>
         <RightNav />
       </div>
