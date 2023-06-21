@@ -11,7 +11,7 @@ export const NewPost = () => {
             alt="avatar"
             className="w-[60px] h-[60px] rounded-full"
           />
-          <input className="py-[10px] px-[15px] text-sm outline-none w-[70%]" placeholder="What's happening?" />
+          <textarea cols={50} className="py-[10px] px-[15px] text-sm border-none outline-none w-[70%]" placeholder="What's happening?"></textarea>
         </div>
       </div>
     </>
