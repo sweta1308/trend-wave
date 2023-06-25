@@ -14,7 +14,8 @@ export const Signup = () => {
     email: "",
     username: "",
     password: "",
-    avatarUrl: "",
+    avatarUrl:
+      "https://res.cloudinary.com/sweta-agarwalla/image/upload/v1687681131/character-guy-avatar-internet_24877-17032_peesfo.jpg",
   });
 
   const signupSubmitHandler = (e) => {
