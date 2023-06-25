@@ -11,6 +11,7 @@ import axios from "axios";
 import { usePost } from "../context/post-context";
 import { DisplayPost } from "../components/DisplayPost";
 import { FollowCount } from "../components/FollowCount";
+import { EditProfile } from "../components/EditProfileModal";
 
 export const Profile = () => {
   document.title = "Trend Wave | Profile";
@@ -24,6 +25,7 @@ export const Profile = () => {
     show: false,
     type: "",
   });
+  const [showEditModal, setShowEditModal] = useState(false);
 
   const getUserDetails = async () => {
     try {
@@ -65,7 +67,12 @@ export const Profile = () => {
           showModal={showModal}
         />
       )}
-      <div style={{ filter: showModal.show ? "blur(8px)" : "" }}>
+      {showEditModal && (
+        <EditProfile userObj={userData} setShowEditModal={setShowEditModal} />
+      )}
+      <div
+        style={{ filter: showModal.show || showEditModal ? "blur(8px)" : "" }}
+      >
         <Navbar />
         <div className="flex">
           <Sidenav />
@@ -76,17 +83,11 @@ export const Profile = () => {
               <div className="w-[500px] md:w-[380px] xs:w-[320px]">
                 <div className="flex items-center justify-between xs:text-[14px]">
                   <div className="flex items-center">
-                    {userData?.avatarUrl ? (
-                      <img
-                        src={userData?.avatarUrl}
-                        alt="avatar"
-                        className="w-[60px] h-[60px] mr-2 rounded-full"
-                      />
-                    ) : (
-                      <div className="w-[60px] text-2xl h-[60px] mr-2 rounded-full bg-primary-color text-white flex justify-center items-center">
-                        {authState?.user?.firstName?.slice(0, 1)}
-                      </div>
-                    )}
+                    <img
+                      src={userData?.avatarUrl}
+                      alt="avatar"
+                      className="w-[60px] h-[60px] mr-2 rounded-full"
+                    />
 
                     <div>
                       <h1 className="font-bold">{`${userData?.firstName} ${userData?.lastName}`}</h1>
@@ -95,7 +96,10 @@ export const Profile = () => {
                   </div>
 
                   {userData?.username === authState?.user?.username ? (
-                    <button className="px-4 py-2 hover:text-primary-color rounded-lg">
+                    <button
+                      onClick={() => setShowEditModal(true)}
+                      className="px-4 py-2 hover:text-primary-color rounded-lg"
+                    >
                       <i className="fa-solid fa-pen fa-md"></i>
                     </button>
                   ) : isFollowed(userData?._id) ? (
