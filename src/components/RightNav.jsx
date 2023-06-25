@@ -16,7 +16,7 @@ export const RightNav = () => {
       ?.followers.some((user) => user._id === authState?.user?._id);
 
   return (
-    <div className="fixed left-[83%] pl-10 xl:pl-5 px-3 py-5 border-l-2 border-solid border-black text-center min-h-screen lg:hidden">
+    <div className="fixed left-[83%] pl-10 xl:pl-5 px-3 py-5 text-center min-h-screen lg:hidden">
       <h1 className="text-left font-bold mb-5 underline decoration-2 decoration-blue-400">
         Suggestions for you
       </h1>
@@ -56,7 +56,7 @@ export const RightNav = () => {
                 ) : (
                   <button
                     onClick={() => followUser(user?._id)}
-                    className="bg-primary-color text-white border-2 border-primary-color rounded-md cursor-pointer text-sm py-[5px] hover:bg-primary-dark my-2"
+                    className="bg-primary-color text-white border-2 border-primary-color rounded-md cursor-pointer text-sm py-[5px] hover:bg-primary-dark hover:border-primary-dark my-2"
                   >
                     <i className="fa-solid fa-plus fa-xs"></i> Follow
                   </button>
