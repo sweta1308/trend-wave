@@ -8,7 +8,7 @@ import { useState } from "react";
 const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-  const { authState } = useAuth();
+  const { authState, authDispatch } = useAuth();
   const [userState, userDispatch] = useReducer(userReducer, []);
   const [userLoading, setUserLoading] = useState(false);
 
@@ -30,14 +30,14 @@ export const UserProvider = ({ children }) => {
 
   const followUser = async (userId) => {
     try {
-      const { data, status } = await axios({
-        method: "POST",
-        url: `/api/users/follow/${userId}`,
-        headers: { authorization: authState?.token },
-      });
+      const { data, status } = await axios.post(
+        `/api/users/follow/${userId}`,
+        {},
+        { headers: { authorization: authState?.token } }
+      );
       if (status === 200 || status === 201) {
-        userDispatch({ type: "UPDATE_USERDATA", payload: data?.followUser });
-        userDispatch({ type: "UPDATE_USERDATA", payload: data?.user });
+        userDispatch({ type: "UPDATE_USER", payload: data?.followUser });
+        userDispatch({ type: "UPDATE_USER", payload: data?.user });
       }
     } catch (e) {
       console.log(e);
@@ -46,31 +46,35 @@ export const UserProvider = ({ children }) => {
 
   const unfollowUser = async (userId) => {
     try {
-      const { data, status } = await axios({
-        method: "POST",
-        url: `/api/users/unfollow/${userId}`,
-        headers: { authorization: authState?.token },
-      });
+      const { data, status } = await axios.post(
+        `/api/users/unfollow/${userId}`,
+        {},
+        { headers: { authorization: authState?.token } }
+      );
       if (status === 200 || status === 201) {
-        userDispatch({ type: "UPDATE_USERDATA", payload: data?.followUser });
-        userDispatch({ type: "UPDATE_USERDATA", payload: data?.user });
+        userDispatch({ type: "UPDATE_USER", payload: data?.followUser });
+        userDispatch({ type: "UPDATE_USER", payload: data?.user });
       }
     } catch (e) {
       console.log(e);
     }
   };
 
-  // const editUserDetails = async () => {
-  //   try {
-  //     const {data, status} = await axios({
-  //       method: "POST",
-  //       url: "/api/users/edit",
-  //       headers: { authorization: authState?.token },
-  //     })
-  //   } catch (e) {
-  //     console.log(e)
-  //   }
-  // }
+  const editUserdata = async (userData) => {
+    try {
+      const { data, status } = await axios.post(
+        "/api/users/edit",
+        { userData },
+        { headers: { authorization: authState?.token } }
+      );
+      if (status === 201) {
+        userDispatch({ type: "UPDATE_USER", payload: data?.user });
+        authDispatch({ type: "SET_USER", payload: data?.user });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
     getUserData();
@@ -79,7 +83,13 @@ export const UserProvider = ({ children }) => {
   return (
     <>
       <UserContext.Provider
-        value={{ userState, userLoading, followUser, unfollowUser }}
+        value={{
+          userState,
+          userLoading,
+          followUser,
+          unfollowUser,
+          editUserdata,
+        }}
       >
         {children}
       </UserContext.Provider>
