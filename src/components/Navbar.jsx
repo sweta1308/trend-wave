@@ -9,7 +9,7 @@ export const Navbar = () => {
   const navigate = useNavigate();
   return (
     <>
-      <div className="bg-white flex justify-between items-center px-14 sticky top-0 z-10 sm:px-3">
+      <div className="bg-white shadow-sm flex justify-between items-center px-14 sticky top-0 z-10 sm:px-3">
         <img
           src={logo}
           alt="logo"
@@ -26,17 +26,11 @@ export const Navbar = () => {
             className="flex items-center cursor-pointer hover:underline hover:decoration-blue-400 hover:text-primary-color sm:text-[14px]"
           >
             <p>{`${authState?.user?.firstName} ${authState?.user?.lastName}`}</p>
-            {authState?.user?.avatarUrl ? (
-              <img
-                src={authState?.user?.avatarUrl}
-                alt="avatar"
-                className="w-[35px] h-[35px] ml-2 rounded-full"
-              />
-            ) : (
-              <div className="w-[35px] h-[35px] ml-2 text-bold rounded-full bg-primary-color text-white flex justify-center items-center">
-                {authState?.user?.firstName?.slice(0, 1)}
-              </div>
-            )}
+            <img
+              src={authState?.user?.avatarUrl}
+              alt="avatar"
+              className="w-[35px] h-[35px] ml-2 rounded-full"
+            />
           </div>
         </div>
       </div>
