@@ -6,6 +6,7 @@ import { usePost } from "../context/post-context";
 import { useAuth } from "../context/auth-context";
 import { useBookmark } from "../context/bookmark-context";
 import { EditDeleteModal } from "./EditDeleteModal";
+import { handleCopyLink } from "../utils/handleCopyLink";
 
 export const DisplayPost = ({ userPost }) => {
   const { _id, content, imageUrl, likes, comments, username, createdAt } =
@@ -17,6 +18,7 @@ export const DisplayPost = ({ userPost }) => {
   const { addBookmarkData, bookmarkState, removeBookmark } = useBookmark();
   const [userDetails, setUserDetails] = useState({});
   const [isModalvisible, setIsModalVisible] = useState(false);
+  const [showEditPostModal, setShowEditPostModal] = useState(false);
 
   useEffect(() => {
     setUserDetails(userState.find((user) => user.username === username));
@@ -76,6 +78,7 @@ export const DisplayPost = ({ userPost }) => {
             deletePost(_id);
             setIsModalVisible(false);
           }}
+          editPost={() => setShowEditPostModal(true)}
         />
       ) : null}
 
@@ -101,7 +104,7 @@ export const DisplayPost = ({ userPost }) => {
 
       <hr />
 
-      <div className="my-3 text-[15px] flex justify-between">
+      <div className="my-3 text-[15px] flex justify-between xs:text-[13px]">
         <div className="cursor-pointer" onClick={toggleLikeHandler}>
           {likedByUser() ? (
             <div>
@@ -116,18 +119,25 @@ export const DisplayPost = ({ userPost }) => {
         </div>
 
         <div className="cursor-pointer">
-          <i class="fa-regular fa-comment"></i> <span>Comment</span>
+          <i className="fa-regular fa-comment"></i> <span>Comment</span>
         </div>
 
         {bookmarkedByUser() ? (
           <div className="cursor-pointer" onClick={() => removeBookmark(_id)}>
-            <i class="fa-solid fa-bookmark"></i> <span>Bookmarked</span>
+            <i className="fa-solid fa-bookmark"></i> <span>Bookmarked</span>
           </div>
         ) : (
           <div className="cursor-pointer" onClick={() => addBookmarkData(_id)}>
-            <i class="fa-regular fa-bookmark"></i> <span>Bookmark</span>
+            <i className="fa-regular fa-bookmark"></i> <span>Bookmark</span>
           </div>
         )}
+
+        <div className="cursor-pointer">
+          <i
+            onClick={() => handleCopyLink(_id)}
+            className="fa-solid fa-share-from-square"
+          ></i>
+        </div>
       </div>
 
       <hr />
