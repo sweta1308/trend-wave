@@ -6,7 +6,7 @@ export const FollowCount = ({ arr, setShowModal, showModal }) => {
   const navigate = useNavigate();
   return (
     <>
-      <div className="w-[300px] bg-primary-lightest border p-[15px] absolute top-44 z-30 rounded-xl left-[40%] md:left-[30%] sm:left-[20%] xs:w-[250px] xs:left-[15%]">
+      <div className="w-[300px] bg-primary-lightest border p-[15px] absolute top-44 shadow-md z-30 rounded-xl left-[40%] md:left-[30%] sm:left-[20%] xs:w-[250px] xs:left-[15%]">
         <div className="flex justify-between items-center pb-[10px]">
           <p className="font-bold">{showModal.type}</p>
           <i
