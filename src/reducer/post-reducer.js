@@ -6,6 +6,8 @@ export const postReducer = (state, { type, payload }) => {
       return { ...state, post: payload };
     case "USER_POST":
       return { ...state, userPost: payload };
+    case "SORT":
+      return { ...state, sortBy: payload };
     default:
       return state;
   }
