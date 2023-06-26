@@ -33,14 +33,13 @@ export const Home = () => {
     ),
   ];
 
-  const sortAsTrending = () => {
+  if (postState?.sortBy === "Trending") {
+    userFeed = userFeed.sort((a, b) => b.likes.likeCount - a.likes.likeCount);
+  } else if (postState?.sortBy === "Latest") {
     userFeed = userFeed.sort(
-      (a, b) => b?.likes?.likeCount - a?.likes?.likeCount
+      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
     );
-    return userFeed;
-  };
-
-  const sortAsLatest = () => {};
+  }
 
   return (
     <>
@@ -49,10 +48,7 @@ export const Home = () => {
         <Sidenav />
         <div className="py-5 mx-5 relative left-[15%] w-[65%] flex flex-col items-center bg-primary-lightest rounded-xl lg:left-[30%] lg:w-[65%] md:left-0 md:w-full md:pb-[110px]">
           <NewPost />
-          <FilterComponent
-            sortAsTrending={sortAsTrending}
-            sortAsLatest={sortAsLatest}
-          />
+          <FilterComponent />
           {postState.postLoading && (
             <PulseLoader color="var(--primary-color)" size={30} />
           )}
