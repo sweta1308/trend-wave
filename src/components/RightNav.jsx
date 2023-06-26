@@ -1,7 +1,7 @@
 import BeatLoader from "react-spinners/BeatLoader";
+import { useNavigate } from "react-router";
 import { useAuth } from "../context/auth-context";
 import { useUser } from "../context/user-context";
-import { useNavigate } from "react-router";
 import { usePost } from "../context/post-context";
 
 export const RightNav = () => {
