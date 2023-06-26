@@ -12,7 +12,7 @@ export const NewPost = () => {
           <img
             src={authState?.user?.avatarUrl}
             alt="avatar"
-            className="w-[60px] h-[60px] mr-[15px] rounded-full"
+            className="w-[60px] h-[60px] mr-[15px] rounded-full xs:w-[45px] xs:h-[45px]"
           />
 
           <textarea
