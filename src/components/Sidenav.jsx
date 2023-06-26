@@ -1,5 +1,5 @@
-import { useAuth } from "../context/auth-context";
 import { NavLink } from "react-router-dom";
+import { useAuth } from "../context/auth-context";
 import { useBookmark } from "../context/bookmark-context";
 
 export const Sidenav = () => {

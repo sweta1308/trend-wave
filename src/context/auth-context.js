@@ -1,8 +1,8 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
-import { toast } from "react-toastify";
-import { authReducer } from "../reducer/auth-reducer";
-import axios from "axios";
 import { useLocation, useNavigate } from "react-router";
+import { toast } from "react-toastify";
+import axios from "axios";
+import { authReducer } from "../reducer/auth-reducer";
 
 const AuthContext = createContext();
 

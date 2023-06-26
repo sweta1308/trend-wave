@@ -1,10 +1,7 @@
-import { useReducer } from "react";
-import { useContext } from "react";
-import { createContext } from "react";
-import { bookmarkReducer } from "../reducer/bookmark-reducer";
+import { useReducer, useContext, createContext, useEffect } from "react";
 import axios from "axios";
+import { bookmarkReducer } from "../reducer/bookmark-reducer";
 import { useAuth } from "./auth-context";
-import { useEffect } from "react";
 
 const BookmarkContext = createContext();
 
@@ -70,8 +67,6 @@ export const BookmarkProvider = ({ children }) => {
     }
   };
 
-  
-
   useEffect(() => {
     if (authState?.token) {
       getBookmarkData();
@@ -80,7 +75,9 @@ export const BookmarkProvider = ({ children }) => {
   }, [authState?.token]);
 
   return (
-    <BookmarkContext.Provider value={{ bookmarkState, addBookmarkData, removeBookmark }}>
+    <BookmarkContext.Provider
+      value={{ bookmarkState, addBookmarkData, removeBookmark }}
+    >
       {children}
     </BookmarkContext.Provider>
   );

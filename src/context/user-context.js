@@ -1,9 +1,14 @@
-import { useReducer, useContext, createContext, useEffect } from "react";
+import {
+  useReducer,
+  useContext,
+  createContext,
+  useEffect,
+  useState,
+} from "react";
 import { toast } from "react-toastify";
-import { userReducer } from "../reducer/user-reducer";
 import axios from "axios";
+import { userReducer } from "../reducer/user-reducer";
 import { useAuth } from "./auth-context";
-import { useState } from "react";
 
 const UserContext = createContext();
 

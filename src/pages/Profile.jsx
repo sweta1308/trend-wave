@@ -1,13 +1,12 @@
+import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import PulseLoader from "react-spinners/PulseLoader";
+import axios from "axios";
 import { Navbar } from "../components/Navbar";
 import { RightNav } from "../components/RightNav";
 import { Sidenav } from "../components/Sidenav";
 import { useAuth } from "../context/auth-context";
 import { useUser } from "../context/user-context";
-import { useState } from "react";
-import { useEffect } from "react";
-import axios from "axios";
 import { usePost } from "../context/post-context";
 import { DisplayPost } from "../components/DisplayPost";
 import { FollowCount } from "../components/FollowCount";

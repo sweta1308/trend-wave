@@ -1,8 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import PulseLoader from "react-spinners/PulseLoader";
 import { useNavigate, useParams } from "react-router";
-import { useEffect } from "react";
 import { Navbar } from "../components/Navbar";
 import { Sidenav } from "../components/Sidenav";
 import { RightNav } from "../components/RightNav";

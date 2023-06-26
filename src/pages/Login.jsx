@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { login, logo } from "../assets";
 import { useNavigate } from "react-router";
+import { login, logo } from "../assets";
 import { useAuth } from "../context/auth-context";
 
 export const Login = () => {
