@@ -1,12 +1,12 @@
-import { useState } from "react";
-import { useUser } from "../context/user-context";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
+import { useUser } from "../context/user-context";
 import { usePost } from "../context/post-context";
 import { useAuth } from "../context/auth-context";
 import { useBookmark } from "../context/bookmark-context";
 import { EditDeleteModal } from "./EditDeleteModal";
 import { handleCopyLink } from "../utils/handleCopyLink";
+import { EditPost } from "./EditPostModal";
 
 export const DisplayPost = ({ userPost }) => {
   const { _id, content, imageUrl, likes, comments, username, createdAt } =
@@ -41,106 +41,127 @@ export const DisplayPost = ({ userPost }) => {
     bookmarkState?.bookmark?.filter((postId) => postId === _id)?.length !== 0;
 
   return (
-    <div
-      key={_id}
-      className="w-[500px] relative p-5 bg-white my-2 rounded-xl md:w-[350px] xs:w-[320px]"
-    >
-      <div className="flex items-center justify-between">
-        <div
-          className="flex cursor-pointer"
-          onClick={() => navigate(`/profile/${username}`)}
-        >
-          <img
-            src={userDetails?.avatarUrl}
-            alt="avatar"
-            className="w-[40px] h-[40px] mr-2 bg-primary-color rounded-full"
-          />
-          <div>
-            <h1 className="font-bold">{`${userDetails?.firstName} ${userDetails?.lastName}`}</h1>
-            <p className="text-xs">{` ${new Date(createdAt)
-              .toDateString()
-              .split(" ")
-              .slice(1, 4)
-              .join(" ")}`}</p>
-          </div>
-        </div>
-        {authState?.user?.username === username && (
-          <i
-            onClick={() => setIsModalVisible((prev) => !prev)}
-            className="fa-solid fa-ellipsis cursor-pointer"
-          ></i>
-        )}
-      </div>
-
-      {isModalvisible && userPost ? (
-        <EditDeleteModal
-          deletePost={() => {
-            deletePost(_id);
-            setIsModalVisible(false);
-          }}
-          editPost={() => setShowEditPostModal(true)}
+    <div className="relative">
+      {showEditPostModal && (
+        <EditPost
+          userPost={userPost}
+          setShowEditPostModal={setShowEditPostModal}
         />
-      ) : null}
-
-      <div className="cursor-pointer" onClick={() => navigate(`/post/${_id}`)}>
-        <p className="pt-5 pb-3">{content}</p>
-        {imageUrl && (
-          <img
-            className="w-[500px] rounded-xl md:w-[350px] xs:w-[280px]"
-            src={imageUrl}
-            alt="uploads"
-          />
-        )}
-      </div>
-
-      <div className="w-[150px] text-[15px] my-3 text-gray-text flex justify-between">
-        <p>{likes?.likeCount} Likes</p>
-        <p>
-          {comments?.length > 0 &&
-            comments?.length +
-              `${comments?.length === 1 ? " Comment" : " Comments"}`}
-        </p>
-      </div>
-
-      <hr />
-
-      <div className="my-3 text-[15px] flex justify-between xs:text-[13px]">
-        <div className="cursor-pointer" onClick={toggleLikeHandler}>
-          {likedByUser() ? (
+      )}
+      <div
+        style={{ filter: showEditPostModal ? "blur(10px)" : "" }}
+        key={_id}
+        className="w-[500px] relative p-5 bg-white my-2 rounded-xl md:w-[350px] xs:w-[320px]"
+      >
+        <div className="flex items-center justify-between">
+          <div
+            className="flex cursor-pointer"
+            onClick={() => navigate(`/profile/${username}`)}
+          >
+            <img
+              src={userDetails?.avatarUrl}
+              alt="avatar"
+              className="w-[40px] h-[40px] mr-2 bg-primary-color rounded-full"
+            />
             <div>
-              <i className="fa-solid fa-heart" style={{ color: "#377dff" }}></i>{" "}
-              <span className="text-primary-color">Liked</span>
+              <h1 className="font-bold">{`${userDetails?.firstName} ${userDetails?.lastName}`}</h1>
+              <p className="text-xs">{` ${new Date(createdAt)
+                .toDateString()
+                .split(" ")
+                .slice(1, 4)
+                .join(" ")}`}</p>
             </div>
-          ) : (
-            <div>
-              <i className="fa-regular fa-heart"></i> <span>Like</span>
-            </div>
+          </div>
+          {authState?.user?.username === username && (
+            <i
+              onClick={() => setIsModalVisible((prev) => !prev)}
+              className="fa-solid fa-ellipsis cursor-pointer"
+            ></i>
           )}
         </div>
 
-        <div className="cursor-pointer">
-          <i className="fa-regular fa-comment"></i> <span>Comment</span>
+        {isModalvisible && userPost ? (
+          <EditDeleteModal
+            deletePost={() => {
+              deletePost(_id);
+              setIsModalVisible(false);
+            }}
+            editPost={() => {
+              setShowEditPostModal(true);
+              setIsModalVisible(false);
+            }}
+          />
+        ) : null}
+
+        <div
+          className="cursor-pointer"
+          onClick={() => navigate(`/post/${_id}`)}
+        >
+          <p className="pt-5 pb-3">{content}</p>
+          {imageUrl && (
+            <img
+              className="w-[500px] rounded-xl md:w-[350px] xs:w-[280px]"
+              src={imageUrl}
+              alt="uploads"
+            />
+          )}
         </div>
 
-        {bookmarkedByUser() ? (
-          <div className="cursor-pointer" onClick={() => removeBookmark(_id)}>
-            <i className="fa-solid fa-bookmark"></i> <span>Bookmarked</span>
-          </div>
-        ) : (
-          <div className="cursor-pointer" onClick={() => addBookmarkData(_id)}>
-            <i className="fa-regular fa-bookmark"></i> <span>Bookmark</span>
-          </div>
-        )}
-
-        <div className="cursor-pointer">
-          <i
-            onClick={() => handleCopyLink(_id)}
-            className="fa-solid fa-share-from-square"
-          ></i>
+        <div className="w-[150px] text-[15px] my-3 text-gray-text flex justify-between">
+          <p>{likes?.likeCount} Likes</p>
+          <p>
+            {comments?.length > 0 &&
+              comments?.length +
+                `${comments?.length === 1 ? " Comment" : " Comments"}`}
+          </p>
         </div>
+
+        <hr />
+
+        <div className="my-3 text-[15px] flex justify-between xs:text-[13px]">
+          <div className="cursor-pointer" onClick={toggleLikeHandler}>
+            {likedByUser() ? (
+              <div>
+                <i
+                  className="fa-solid fa-heart"
+                  style={{ color: "#377dff" }}
+                ></i>{" "}
+                <span className="text-primary-color">Liked</span>
+              </div>
+            ) : (
+              <div>
+                <i className="fa-regular fa-heart"></i> <span>Like</span>
+              </div>
+            )}
+          </div>
+
+          <div className="cursor-pointer">
+            <i className="fa-regular fa-comment"></i> <span>Comment</span>
+          </div>
+
+          {bookmarkedByUser() ? (
+            <div className="cursor-pointer" onClick={() => removeBookmark(_id)}>
+              <i className="fa-solid fa-bookmark"></i> <span>Bookmarked</span>
+            </div>
+          ) : (
+            <div
+              className="cursor-pointer"
+              onClick={() => addBookmarkData(_id)}
+            >
+              <i className="fa-regular fa-bookmark"></i> <span>Bookmark</span>
+            </div>
+          )}
+
+          <div className="cursor-pointer">
+            <i
+              onClick={() => handleCopyLink(_id)}
+              className="fa-solid fa-share-from-square"
+            ></i>
+          </div>
+        </div>
+
+        <hr />
       </div>
-
-      <hr />
     </div>
   );
 };
