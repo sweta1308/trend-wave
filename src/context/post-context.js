@@ -1,11 +1,8 @@
-import { useReducer } from "react";
-import { useContext } from "react";
-import { createContext } from "react";
-import { postReducer } from "../reducer/post-reducer";
+import { useReducer, useContext, createContext, useEffect } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { useEffect } from "react";
 import { useAuth } from "./auth-context";
+import { postReducer } from "../reducer/post-reducer";
 
 const PostContext = createContext();
 
@@ -14,6 +11,7 @@ export const PostProvider = ({ children }) => {
     postLoading: false,
     post: [],
     userPost: [],
+    sortBy: "",
   };
   const [postState, postDispatch] = useReducer(postReducer, initialState);
   const { authState } = useAuth();
@@ -57,7 +55,7 @@ export const PostProvider = ({ children }) => {
       });
       if (status === 200 || status === 201) {
         postDispatch({ type: "GET_POST", payload: data?.posts });
-        return data.posts.find(post => post._id === postId);
+        return data.posts.find((post) => post._id === postId);
       }
     } catch (e) {
       console.log(e);
@@ -79,6 +77,21 @@ export const PostProvider = ({ children }) => {
     }
   };
 
+  const editPostData = async (postId, postData) => {
+    try {
+      const { data, status } = await axios.post(
+        `/api/posts/edit/${postId}`,
+        { postData },
+        { headers: { authorization: authState?.token } }
+      );
+      if (status === 201) {
+        postDispatch({ type: "GET_POST", payload: data?.posts });
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   const deletePost = async (postId) => {
     try {
       const { data, status } = await axios({
@@ -87,7 +100,7 @@ export const PostProvider = ({ children }) => {
         headers: { authorization: authState?.token },
       });
       if (status === 200 || status === 201) {
-        console.log("Hi")
+        console.log("Hi");
         postDispatch({ type: "GET_POST", payload: data?.posts });
       }
     } catch (e) {
@@ -103,7 +116,15 @@ export const PostProvider = ({ children }) => {
 
   return (
     <PostContext.Provider
-      value={{ postState, getUserPost, likePost, dislikePost, deletePost }}
+      value={{
+        postState,
+        postDispatch,
+        getUserPost,
+        likePost,
+        dislikePost,
+        deletePost,
+        editPostData,
+      }}
     >
       {children}
     </PostContext.Provider>
