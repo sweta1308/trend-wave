@@ -71,7 +71,10 @@ export const Navbar = () => {
         </div>
       </div>
 
-      <div className="border border-gray-400 rounded-lg hidden md:block w-[full] mx-[50px] mb-[30px] sm:mx-[20px]">
+      <div
+        onClick={() => setShowSearchModal(true)}
+        className="border border-gray-400 rounded-lg hidden md:block w-[full] mx-[50px] mb-[30px] sm:mx-[20px]"
+      >
         <i className="fa-solid fa-magnifying-glass mx-[10px]"></i>
         <input
           placeholder="Search User"
