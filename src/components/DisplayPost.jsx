@@ -7,6 +7,7 @@ import { useBookmark } from "../context/bookmark-context";
 import { EditDeleteModal } from "./EditDeleteModal";
 import { handleCopyLink } from "../utils/handleCopyLink";
 import { EditPost } from "./EditPostModal";
+import { getPostDate } from "../utils/getPostDate";
 
 export const DisplayPost = ({ userPost }) => {
   const { _id, content, imageUrl, likes, comments, username, createdAt } =
@@ -49,9 +50,11 @@ export const DisplayPost = ({ userPost }) => {
         />
       )}
       <div
-        style={{ filter: showEditPostModal ? "blur(10px)" : "" }}
+        style={{
+          filter: showEditPostModal ? "blur(10px)" : "",
+        }}
         key={_id}
-        className="w-[500px] relative p-5 bg-white my-2 rounded-xl md:w-[350px] xs:w-[320px]"
+        className="bg-white w-[500px] relative p-5 my-2 rounded-xl md:w-[350px] xs:w-[320px]"
       >
         <div className="flex items-center justify-between">
           <div
@@ -65,11 +68,7 @@ export const DisplayPost = ({ userPost }) => {
             />
             <div>
               <h1 className="font-bold">{`${userDetails?.firstName} ${userDetails?.lastName}`}</h1>
-              <p className="text-xs">{` ${new Date(createdAt)
-                .toDateString()
-                .split(" ")
-                .slice(1, 4)
-                .join(" ")}`}</p>
+              <p className="text-xs">{` ${getPostDate(createdAt)}`}</p>
             </div>
           </div>
           {authState?.user?.username === username && (
