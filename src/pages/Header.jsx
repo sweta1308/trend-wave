@@ -6,7 +6,7 @@ export const Header = () => {
   const navigate = useNavigate();
   return (
     <>
-      <div className="py-24 px-54 flex justify-evenly xl:px-56 lg:px-32 md:flex-col-reverse md:items-center">
+      <div className="min-h-screen py-24 px-54 flex justify-evenly xl:px-56 lg:px-32 md:flex-col-reverse md:items-center">
         <div className="w-240 md:text-center">
           <img
             src={logo}

@@ -25,7 +25,7 @@ export const Signup = () => {
 
   return (
     <>
-      <div className="shadow-lg px-10 py-5 pb-8 mt-16 w-96 m-auto sm:w-80 sm:px-6">
+      <div className="min-h-screen shadow-lg px-10 py-5 pb-8 w-96 m-auto sm:w-80 sm:px-6">
         <h1 className="text-3xl py-5 underline decoration-blue-400 font-bold text-center mb-8">
           Signup
         </h1>
