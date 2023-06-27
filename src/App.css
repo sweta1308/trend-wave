@@ -11,5 +11,7 @@ body {
   --primary-darker: #566176;
   --primary-lightest: #f4f4fb;
   --white-color: #ffffff;
-  --gray-text: #5f5e5e;
+  --gray-text: #797777;
+  --dark-mode: #1A202C;
+  --dark-light: #262c3c;
 }
