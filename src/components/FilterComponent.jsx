@@ -4,7 +4,7 @@ export const FilterComponent = () => {
   const { postDispatch, postState } = usePost();
   return (
     <div>
-      <div className="flex justify-around w-[400px] mt-[20px] text-lg xs:w-[300px]">
+      <div className="flex justify-around w-[400px] mt-[80px] text-lg xs:w-[300px]">
         <button
           onClick={() => postDispatch({ type: "SORT", payload: "Trending" })}
         >
