@@ -11,7 +11,7 @@ export const PostProvider = ({ children }) => {
     postLoading: false,
     post: [],
     userPost: [],
-    sortBy: "",
+    sortBy: "Latest",
   };
   const [postState, postDispatch] = useReducer(postReducer, initialState);
   const { authState } = useAuth();
@@ -29,6 +29,21 @@ export const PostProvider = ({ children }) => {
       }
     } catch (e) {
       toast.error(e.response.data.errors[0]);
+    }
+  };
+
+  const createNewPost = async (postData) => {
+    try {
+      const { data, status } = await axios.post(
+        `/api/posts`,
+        { postData },
+        { headers: { authorization: authState?.token } }
+      );
+      if (status === 201) {
+        postDispatch({ type: "GET_POST", payload: data?.posts });
+      }
+    } catch (e) {
+      console.log(e);
     }
   };
 
@@ -119,6 +134,7 @@ export const PostProvider = ({ children }) => {
       value={{
         postState,
         postDispatch,
+        createNewPost,
         getUserPost,
         likePost,
         dislikePost,
