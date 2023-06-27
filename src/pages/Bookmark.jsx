@@ -15,8 +15,10 @@ export const Bookmark = () => {
       <Navbar />
       <div className="flex">
         <Sidenav />
-        <div className="py-5 mx-5 relative left-[15%] w-[65%] flex flex-col items-center bg-primary-lightest rounded-xl lg:left-[30%] lg:w-[65%] md:left-0 md:w-full md:pb-[110px]">
-          <h1 className="text-2xl font-bold mb-5 underline decoration-blue-400">Bookmarks</h1>
+        <div className="min-h-screen bg-primary-lightest py-5 mx-5 relative left-[15%] w-[65%] flex flex-col items-center rounded-xl lg:left-[30%] lg:w-[65%] md:left-0 md:w-full md:pb-[110px]">
+          <h1 className="text-2xl font-bold mb-5 underline decoration-blue-400">
+            Bookmarks
+          </h1>
           {bookmarkState?.bookmark?.length === 0 ? (
             <h1 className="text-2xl font-medium text-primary-color mt-10">
               No Bookmarks Added!
@@ -46,4 +48,3 @@ export const Bookmark = () => {
     </>
   );
 };
-
