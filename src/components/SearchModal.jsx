@@ -19,10 +19,15 @@ export const SearchModal = ({ searchInput, setShowSearchModal }) => {
 
   return (
     <div className="p-[20px] text-sm z-50 m-auto absolute top-[80px] bg-white shadow-lg left-[38%] w-[300px] xl:left-[30%] md:top-[150px] sm:top-[120px] sm:left-[25%] xs:left-[12%]">
+      <i
+        className="fa-solid fa-xmark absolute right-[20px] cursor-pointer hover:text-primary-color"
+        onClick={() => setShowSearchModal(false)}
+      ></i>
       <div>
-        {searchInput?.length >= 0 && (
+        {searchInput?.length > 0 && (
           <div>{filteredUser?.length === 0 && <h1>No Users Found</h1>}</div>
         )}
+        {searchInput?.length === 0 && <h1>No Users Found</h1>}
       </div>
       <div>
         {filteredUser?.length > 0 && (
