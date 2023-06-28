@@ -36,7 +36,9 @@ export const Navbar = () => {
           <input
             placeholder="Search User"
             value={searchInput}
-            onChange={(e) => setsearchInput(e.target.value)}
+            onChange={(e) => {
+              setsearchInput(e.target.value);
+            }}
             className="p-[10px] outline-none text-sm w-[350px] lg:w-[200px]"
           />
         </div>
@@ -79,7 +81,10 @@ export const Navbar = () => {
         <input
           placeholder="Search User"
           value={searchInput}
-          onChange={(e) => setsearchInput(e.target.value)}
+          onChange={(e) => {
+            setsearchInput(e.target.value);
+            searchInput?.length > 0 && setShowSearchModal(true);
+          }}
           className="p-[10px] outline-none text-sm"
         />
       </div>
