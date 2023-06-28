@@ -17,9 +17,7 @@ export const RightNav = () => {
 
   return (
     <div className="fixed left-[83%] pl-10 xl:pl-5 px-3 py-5 text-center min-h-screen lg:hidden">
-      <h1 className="text-left font-bold mb-5 underline decoration-2 decoration-blue-400">
-        Suggestions for you
-      </h1>
+      <h1 className="text-left font-bold mb-5 ">Suggestions for you</h1>
 
       {userLoading ? (
         <BeatLoader color="var(--primary-color)" size={10} />
