@@ -67,7 +67,11 @@ export const Profile = () => {
         />
       )}
       {showEditModal && (
-        <EditProfile userObj={userData} setShowEditModal={setShowEditModal} />
+        <EditProfile
+          userObj={userData}
+          setShowEditModal={setShowEditModal}
+          showEditModal={showEditModal}
+        />
       )}
       <div
         style={{ filter: showModal.show || showEditModal ? "blur(8px)" : "" }}
