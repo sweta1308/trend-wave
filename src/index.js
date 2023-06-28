@@ -10,6 +10,7 @@ import { PostProvider } from "./context/post-context";
 import { UserProvider } from "./context/user-context";
 import { BookmarkProvider } from "./context/bookmark-context";
 import { ThemeProvider } from "./context/theme-context";
+import { CommentProvider } from "./context/comment-context";
 
 // Call make Server
 makeServer();
@@ -23,7 +24,9 @@ root.render(
           <PostProvider>
             <UserProvider>
               <BookmarkProvider>
-                <App />
+                <CommentProvider>
+                  <App />
+                </CommentProvider>
               </BookmarkProvider>
             </UserProvider>
           </PostProvider>
