@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { useAuth } from "./auth-context";
 import { postReducer } from "../reducer/post-reducer";
+import { useNavigate } from "react-router";
 
 const PostContext = createContext();
 
@@ -15,6 +16,7 @@ export const PostProvider = ({ children }) => {
   };
   const [postState, postDispatch] = useReducer(postReducer, initialState);
   const { authState } = useAuth();
+  const navigate = useNavigate();
 
   const getPostData = async () => {
     try {
@@ -107,7 +109,7 @@ export const PostProvider = ({ children }) => {
     }
   };
 
-  const deletePost = async (postId) => {
+  const deletePost = async (postId, fromSinglePost) => {
     try {
       const { data, status } = await axios({
         method: "DELETE",
@@ -115,8 +117,8 @@ export const PostProvider = ({ children }) => {
         headers: { authorization: authState?.token },
       });
       if (status === 200 || status === 201) {
-        console.log("Hi");
         postDispatch({ type: "GET_POST", payload: data?.posts });
+        fromSinglePost && navigate("/");
       }
     } catch (e) {
       console.log(e);
