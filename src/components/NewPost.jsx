@@ -124,6 +124,7 @@ export const NewPost = ({ showModal, setShowModal }) => {
                 createNewPost(userInput);
                 setUserInput(initialState);
                 setImage(null);
+                setShowModal(false);
               }}
               className="bg-primary-color text-white py-[5px] px-[15px] rounded-md"
               disabled={userInput?.content === "" && userInput?.imageUrl === ""}
@@ -136,4 +137,3 @@ export const NewPost = ({ showModal, setShowModal }) => {
     </Modal>
   );
 };
-//py-[15px] w-[700px] m-auto pl-[90px] relative lg:w-[500px] xs:w-[370px] xs:pl-[20px]
