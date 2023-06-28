@@ -1,6 +1,5 @@
 import PulseLoader from "react-spinners/PulseLoader";
 import { Navbar } from "../components/Navbar";
-import { NewPost } from "../components/NewPost";
 import { RightNav } from "../components/RightNav";
 import { Sidenav } from "../components/Sidenav";
 import { useAuth } from "../context/auth-context";
@@ -47,7 +46,6 @@ export const Home = () => {
       <div className="flex">
         <Sidenav />
         <div className="min-h-screen bg-primary-lightest py-5 mx-5 relative left-[15%] w-[65%] flex flex-col items-center rounded-xl lg:left-[30%] lg:w-[65%] md:left-0 md:w-full md:pb-[110px]">
-          <NewPost />
           <FilterComponent />
           {postState.postLoading && (
             <PulseLoader color="var(--primary-color)" size={30} />
