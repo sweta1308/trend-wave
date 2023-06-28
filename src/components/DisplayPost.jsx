@@ -9,7 +9,7 @@ import { EditPost } from "./EditPostModal";
 import { getPostDate } from "../utils/getPostDate";
 import { handleShare } from "../utils/handleShare";
 
-export const DisplayPost = ({ userPost }) => {
+export const DisplayPost = ({ userPost, fromSinglePost }) => {
   const { _id, content, imageUrl, likes, comments, username, createdAt } =
     userPost;
   const navigate = useNavigate();
@@ -53,7 +53,7 @@ export const DisplayPost = ({ userPost }) => {
       <div
         style={{ filter: showEditPostModal ? "blur(10px)" : "" }}
         key={_id}
-        className="bg-white w-[600px] relative p-5 my-2 rounded-xl lg:w-[500px] md:w-[350px] xs:w-[320px]"
+        className="bg-white w-[600px] m-auto relative p-5 my-2 rounded-xl lg:w-[500px] md:w-[350px] xs:w-[300px]"
       >
         <div className="flex items-center justify-between">
           <div
@@ -79,7 +79,7 @@ export const DisplayPost = ({ userPost }) => {
         {isModalvisible && userPost ? (
           <EditDeleteModal
             deletePost={() => {
-              deletePost(_id);
+              deletePost(_id, fromSinglePost);
               setIsModalVisible(false);
             }}
             editPost={() => {
