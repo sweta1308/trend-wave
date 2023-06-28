@@ -5,9 +5,9 @@ import { usePost } from "../context/post-context";
 import { useAuth } from "../context/auth-context";
 import { useBookmark } from "../context/bookmark-context";
 import { EditDeleteModal } from "./EditDeleteModal";
-import { handleCopyLink } from "../utils/handleCopyLink";
 import { EditPost } from "./EditPostModal";
 import { getPostDate } from "../utils/getPostDate";
+import { handleShare } from "../utils/handleShare";
 
 export const DisplayPost = ({ userPost }) => {
   const { _id, content, imageUrl, likes, comments, username, createdAt } =
@@ -47,14 +47,13 @@ export const DisplayPost = ({ userPost }) => {
         <EditPost
           userPost={userPost}
           setShowEditPostModal={setShowEditPostModal}
+          editPostModal={showEditPostModal}
         />
       )}
       <div
-        style={{
-          filter: showEditPostModal ? "blur(10px)" : "",
-        }}
+        style={{ filter: showEditPostModal ? "blur(10px)" : "" }}
         key={_id}
-        className="bg-white w-[500px] relative p-5 my-2 rounded-xl md:w-[350px] xs:w-[320px]"
+        className="bg-white w-[600px] relative p-5 my-2 rounded-xl lg:w-[500px] md:w-[350px] xs:w-[320px]"
       >
         <div className="flex items-center justify-between">
           <div
@@ -71,12 +70,10 @@ export const DisplayPost = ({ userPost }) => {
               <p className="text-xs">{` ${getPostDate(createdAt)}`}</p>
             </div>
           </div>
-          {authState?.user?.username === username && (
-            <i
-              onClick={() => setIsModalVisible((prev) => !prev)}
-              className="fa-solid fa-ellipsis cursor-pointer"
-            ></i>
-          )}
+          <i
+            onClick={() => setIsModalVisible((prev) => !prev)}
+            className="fa-solid fa-ellipsis cursor-pointer"
+          ></i>
         </div>
 
         {isModalvisible && userPost ? (
@@ -89,6 +86,9 @@ export const DisplayPost = ({ userPost }) => {
               setShowEditPostModal(true);
               setIsModalVisible(false);
             }}
+            username={username}
+            postId={_id}
+            setIsModalVisible={setIsModalVisible}
           />
         ) : null}
 
@@ -99,7 +99,7 @@ export const DisplayPost = ({ userPost }) => {
           <p className="pt-5 pb-3">{content}</p>
           {imageUrl && (
             <img
-              className="w-[500px] rounded-xl md:w-[350px] xs:w-[280px]"
+              className="w-[600px] rounded-xl md:w-[350px] xs:w-[280px]"
               src={imageUrl}
               alt="uploads"
             />
@@ -134,7 +134,10 @@ export const DisplayPost = ({ userPost }) => {
             )}
           </div>
 
-          <div className="cursor-pointer">
+          <div
+            className="cursor-pointer"
+            onClick={() => navigate(`/post/${_id}`)}
+          >
             <i className="fa-regular fa-comment"></i> <span>Comment</span>
           </div>
 
@@ -153,7 +156,7 @@ export const DisplayPost = ({ userPost }) => {
 
           <div className="cursor-pointer">
             <i
-              onClick={() => handleCopyLink(_id)}
+              onClick={() => handleShare(_id)}
               className="fa-solid fa-share-from-square"
             ></i>
           </div>
