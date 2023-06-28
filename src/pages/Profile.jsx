@@ -46,7 +46,7 @@ export const Profile = () => {
   useEffect(() => {
     getUserDetails();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [username, postState.post, userState]);
+  }, [username, postState?.post, userState]);
 
   const isFollowed = (userId) =>
     userState
@@ -83,7 +83,7 @@ export const Profile = () => {
             {dataLoading ? (
               <PulseLoader color="var(--primary-color)" size={30} />
             ) : (
-              <div className="w-[500px] md:w-[380px] xs:w-[320px]">
+              <div className="w-[600px] lg:w-[500px] md:w-[380px] xs:w-[320px]">
                 <div className="flex items-center justify-between xs:text-[14px]">
                   <div className="flex items-center">
                     <img
