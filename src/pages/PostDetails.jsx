@@ -39,12 +39,10 @@ export const PostDetails = () => {
     }
   };
 
-  console.log(commentInput);
-
   useEffect(() => {
     getPostDetails();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [postState.post]);
+  }, [postState?.post]);
 
   return (
     <>
@@ -59,7 +57,7 @@ export const PostDetails = () => {
             <PulseLoader color="var(--primary-color)" size={30} />
           ) : (
             <div>
-              <DisplayPost userPost={postDetails} />
+              <DisplayPost userPost={postDetails} fromSinglePost />
               <div className="mx-auto my-[15px]">
                 <input
                   value={commentInput}
