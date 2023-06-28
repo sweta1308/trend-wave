@@ -83,7 +83,6 @@ export const Navbar = () => {
           value={searchInput}
           onChange={(e) => {
             setsearchInput(e.target.value);
-            searchInput?.length > 0 && setShowSearchModal(true);
           }}
           className="p-[10px] outline-none text-sm"
         />
