@@ -84,7 +84,7 @@ export const Navbar = () => {
           onChange={(e) => {
             setsearchInput(e.target.value);
           }}
-          className="p-[10px] outline-none text-sm"
+          className="p-[10px] outline-none text-sm dark:bg-dark-mode"
         />
       </div>
     </div>
