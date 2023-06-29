@@ -6,11 +6,13 @@ export const FilterComponent = () => {
     <div>
       <div className="flex justify-around w-[400px] mt-[20px] text-lg xs:w-[300px]">
         <button
+          className="hover:text-primary-color hover:underline"
           onClick={() => postDispatch({ type: "SORT", payload: "Trending" })}
         >
           <i className="fa-solid fa-fire"></i> Trending
         </button>
         <button
+          className="hover:text-primary-color hover:underline"
           onClick={() => postDispatch({ type: "SORT", payload: "Latest" })}
         >
           <i className="fa-solid fa-clock-rotate-left"></i> Latest
