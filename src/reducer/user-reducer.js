@@ -3,7 +3,9 @@ export const userReducer = (state, { type, payload }) => {
     case "GET_USER":
       return (state = payload);
     case "UPDATE_USER":
-      return state.map((user) => (user._id === payload._id ? {...payload} : user));
+      return state.map((user) =>
+        user._id === payload._id ? { ...payload } : user
+      );
     default:
       return state;
   }
