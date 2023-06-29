@@ -10,11 +10,11 @@ import { useUser } from "../context/user-context";
 import { usePost } from "../context/post-context";
 import { useComment } from "../context/comment-context";
 import { useAuth } from "../context/auth-context";
+import { EditComment } from "../components/EditComment";
 
 export const PostDetails = () => {
   document.title = "Trend Wave | Post details";
   const [postDetails, setPostDetails] = useState({});
-  const [postLoading, setPostLoading] = useState(false);
   const { postID } = useParams();
   const { authState } = useAuth();
   const { userState } = useUser();
@@ -22,17 +22,17 @@ export const PostDetails = () => {
   const { getUserPost, postState } = usePost();
   const { addComments, deleteComment } = useComment();
   const [commentInput, setCommentInput] = useState("");
+  const [showEdit, setShowEdit] = useState(false);
 
   const getPostDetails = async () => {
     try {
-      setPostLoading(true);
       const { data, status } = await axios({
         method: "GET",
         url: `/api/posts/${postID}`,
       });
       if (status === 200 || status === 201) {
         setPostDetails(data?.post);
-        setPostLoading(false);
+        // setPostLoading(false);
       }
     } catch (e) {
       console.log(e);
@@ -51,9 +51,9 @@ export const PostDetails = () => {
         <Sidenav />
         <div
           key={postDetails._id}
-          className="min-h-screen bg-primary-lightest py-5 mx-5 relative left-[15%] w-[65%] flex flex-col items-center rounded-xl lg:left-[30%] lg:w-[65%] md:left-0 md:w-full md:pb-[110px]"
+          className="min-h-screen bg-primary-lightest py-5 mx-5 relative left-[15%] w-[65%] flex flex-col items-center rounded-xl lg:left-[30%] lg:w-[65%] md:left-0 md:w-full md:pb-[110px] dark:bg-dark-light"
         >
-          {postLoading ? (
+          {postState?.postLoading ? (
             <PulseLoader color="var(--primary-color)" size={30} />
           ) : (
             <div>
@@ -63,7 +63,7 @@ export const PostDetails = () => {
                   value={commentInput}
                   onChange={(e) => setCommentInput(e.target.value)}
                   placeholder="Add Comment..."
-                  className="w-[505px] border border-gray-400 px-[15px] py-[10px] text-sm rounded-lg lg:w-[405px] md:w-[255px] xs:w-[220px]"
+                  className="w-[505px] border border-gray-400 px-[15px] py-[10px] text-sm rounded-lg lg:w-[405px] md:w-[255px] xs:w-[220px] dark:bg-dark-mode"
                 />
                 <button
                   onClick={() => {
@@ -85,8 +85,14 @@ export const PostDetails = () => {
                     return (
                       <div
                         key={comment?._id}
-                        className="bg-white px-5 py-px pt-2 rounded-lg"
+                        className="bg-white px-5 py-px pt-2 rounded-lg w-[600px] lg:w-[500px] md:w-[350px] xs:w-[300px] dark:bg-dark-mode"
                       >
+                        <EditComment
+                          setShowEdit={setShowEdit}
+                          showEdit={showEdit}
+                          comment={comment}
+                          postId={postDetails?._id}
+                        />
                         <div
                           className="flex items-center cursor-pointer"
                           onClick={() => {
@@ -105,15 +111,23 @@ export const PostDetails = () => {
                           </div>
                         </div>
                         <div className="flex justify-between items-center">
-                          <p className="my-2">{comment?.text}</p>
+                          <p className="my-2 w-[500px] lg:w-[400px] md:w-[250px] xs:w-[200px]">
+                            {comment?.text}
+                          </p>
                           {authState?.user?.username ===
                             userComment?.username && (
-                            <i
-                              onClick={() =>
-                                deleteComment(postDetails?._id, comment?._id)
-                              }
-                              className="fa-solid fa-trash-can cursor-pointer hover:text-primary-color"
-                            ></i>
+                            <div>
+                              <i
+                                onClick={() => setShowEdit(true)}
+                                className="fa-solid fa-pen fa-md mr-[15px] cursor-pointer hover:text-primary-color"
+                              ></i>
+                              <i
+                                onClick={() =>
+                                  deleteComment(postDetails?._id, comment?._id)
+                                }
+                                className="fa-solid fa-trash-can cursor-pointer hover:text-primary-color"
+                              ></i>
+                            </div>
                           )}
                         </div>
                       </div>
