@@ -17,9 +17,8 @@ export const Profile = () => {
   const { username } = useParams();
   const { authState } = useAuth();
   const { postState, getUserPost } = usePost();
-  const { userState, followUser, unfollowUser } = useUser();
+  const { userState, followUser, unfollowUser, userLoading } = useUser();
   const [userData, setUserData] = useState({});
-  const [dataLoading, setDataLoading] = useState(false);
   const [showModal, setShowModal] = useState({
     show: false,
     type: "",
@@ -28,14 +27,12 @@ export const Profile = () => {
 
   const getUserDetails = async () => {
     try {
-      setDataLoading(true);
       const { data, status } = await axios({
         method: "GET",
         url: `/api/users/${username}`,
       });
       if (status === 200 || status === 201) {
         setUserData(data?.user);
-        setDataLoading(false);
         getUserPost(username);
       }
     } catch (e) {
@@ -46,7 +43,7 @@ export const Profile = () => {
   useEffect(() => {
     getUserDetails();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [username, postState?.post, userState]);
+  }, [username, userData]);
 
   const isFollowed = (userId) =>
     userState
@@ -79,8 +76,8 @@ export const Profile = () => {
         <Navbar />
         <div className="flex">
           <Sidenav />
-          <div className="min-h-screen bg-primary-lightest py-5 mx-5 relative left-[15%] w-[65%] flex flex-col items-center rounded-xl lg:left-[30%] lg:w-[65%] md:left-0 md:w-full  md:pb-[110px]">
-            {dataLoading ? (
+          <div className="min-h-screen bg-primary-lightest py-5 mx-5 relative left-[15%] w-[65%] flex flex-col items-center rounded-xl lg:left-[30%] lg:w-[65%] md:left-0 md:w-full  md:pb-[110px] dark:bg-dark-light">
+            {userLoading ? (
               <PulseLoader color="var(--primary-color)" size={30} />
             ) : (
               <div className="w-[600px] lg:w-[500px] md:w-[380px] xs:w-[320px]">
