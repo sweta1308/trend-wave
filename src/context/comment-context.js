@@ -24,6 +24,21 @@ export const CommentProvider = ({ children }) => {
     }
   };
 
+  const editComment = async (postId, commentId, commentData) => {
+    try {
+      const { data, status } = await axios.post(
+        `/api/comments/edit/${postId}/${commentId}`,
+        { commentData },
+        { headers: { authorization: authState?.token } }
+      );
+      if (status === 201 || status === 200) {
+        postDispatch({ type: "GET_POST", payload: data?.posts });
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   const deleteComment = async (postId, commentId) => {
     try {
       const { data, status } = await axios({
@@ -40,7 +55,9 @@ export const CommentProvider = ({ children }) => {
   };
 
   return (
-    <CommentContext.Provider value={{ addComments, deleteComment }}>
+    <CommentContext.Provider
+      value={{ addComments, deleteComment, editComment }}
+    >
       {children}
     </CommentContext.Provider>
   );
