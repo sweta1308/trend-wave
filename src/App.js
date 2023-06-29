@@ -15,7 +15,7 @@ import { PostDetails } from "./pages/PostDetails";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App dark:bg-dark-mode dark:text-white">
       <ToastContainer position="top-right" autoClose={2000} />
       <Routes>
         <Route path="/register" element={<Header />} />
