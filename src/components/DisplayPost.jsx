@@ -53,7 +53,7 @@ export const DisplayPost = ({ userPost, fromSinglePost }) => {
       <div
         style={{ filter: showEditPostModal ? "blur(10px)" : "" }}
         key={_id}
-        className="bg-white w-[600px] m-auto relative p-5 my-2 rounded-xl lg:w-[500px] md:w-[350px] xs:w-[300px]"
+        className="bg-white w-[600px] m-auto relative p-5 my-2 rounded-xl lg:w-[500px] md:w-[350px] xs:w-[300px] dark:bg-dark-mode"
       >
         <div className="flex items-center justify-between">
           <div

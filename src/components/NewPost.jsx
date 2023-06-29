@@ -33,10 +33,10 @@ export const NewPost = ({ showModal, setShowModal }) => {
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <div className="bg-white">
-        <div style={{ ...style }} className="bg-white z-40 p-[20px] rounded-lg">
+      <div className="bg-white dark:bg-dark-mode">
+        <div style={{ ...style }} className="bg-white z-40 p-[20px] rounded-lg dark:bg-dark-mode">
           <i
-            className="fa-solid fa-xmark absolute right-[20px] cursor-pointer hover:text-primary-color"
+            className="fa-solid fa-xmark absolute right-[20px] cursor-pointer hover:text-primary-color dark:text-white"
             onClick={() => setShowModal(false)}
           ></i>
           <div className="flex w-full justify-center">
@@ -44,7 +44,7 @@ export const NewPost = ({ showModal, setShowModal }) => {
               <textarea
                 cols="100"
                 value={userInput?.content}
-                className="text-black h-[100px] shadow-lg resize-none py-[10px] px-[15px] text-sm border-none outline-none w-[100%]"
+                className="text-black h-[100px] shadow-lg resize-none py-[10px] px-[15px] text-sm border-none outline-none w-[100%] dark:bg-dark-mode dark:shadow-gray-700"
                 placeholder="What's happening?"
                 onChange={(e) =>
                   setUserInput({ ...userInput, content: e.target.value })

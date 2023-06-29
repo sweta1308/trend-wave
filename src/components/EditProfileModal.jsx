@@ -52,7 +52,7 @@ export const EditProfile = ({ userObj, setShowEditModal, showEditModal }) => {
       >
         <div
           style={{ filter: showAvatarModal ? "blur(10px)" : "", ...style }}
-          className="bg-white z-40 p-[20px] rounded-lg"
+          className="bg-white z-40 p-[20px] rounded-lg dark:bg-dark-mode dark:text-white"
         >
           <h1 className="font-bold mb-[15px]">EDIT PROFILE</h1>
           <form className="flex flex-col" onSubmit={submitHandler}>
@@ -80,7 +80,7 @@ export const EditProfile = ({ userObj, setShowEditModal, showEditModal }) => {
                   value={userValue?.firstName}
                   id="first-name"
                   name="firstName"
-                  className="text-sm w-[160px] border border-gray-300 rounded-md p-[5px]"
+                  className="text-sm w-[140px] border border-gray-300 rounded-md p-[5px] dark:bg-dark-mode"
                   onChange={handleChange}
                 />
               </div>
@@ -93,7 +93,7 @@ export const EditProfile = ({ userObj, setShowEditModal, showEditModal }) => {
                   value={userValue?.lastName}
                   id="last-name"
                   name="lastName"
-                  className="text-sm w-[160px] border border-gray-300 rounded-md p-[5px]"
+                  className="text-sm w-[140px] border border-gray-300 rounded-md p-[5px] dark:bg-dark-mode"
                   onChange={handleChange}
                 />
               </div>
@@ -106,7 +106,7 @@ export const EditProfile = ({ userObj, setShowEditModal, showEditModal }) => {
               id="bio"
               name="bio"
               value={userValue?.bio}
-              className="text-sm resize-none border border-gray-300 rounded-md p-[5px]"
+              className="text-sm resize-none border border-gray-300 rounded-md p-[5px] dark:bg-dark-mode"
               onChange={handleChange}
             ></textarea>
             <label for="website" className="mt-[10px]">
@@ -116,7 +116,7 @@ export const EditProfile = ({ userObj, setShowEditModal, showEditModal }) => {
               value={userValue?.website}
               id="website"
               name="website"
-              className="text-sm border border-gray-300 rounded-md p-[5px]"
+              className="text-sm border border-gray-300 rounded-md p-[5px] dark:bg-dark-mode"
               onChange={handleChange}
             />
             <div className="mt-[15px]">
@@ -126,7 +126,7 @@ export const EditProfile = ({ userObj, setShowEditModal, showEditModal }) => {
                 type="submit"
               />
               <button
-                className="bg-white px-[15px] py-[5px] border border-primary-color rounded-md text-primary-color hover:bg-primary-color hover:text-white"
+                className="px-[15px] py-[5px] border border-primary-color rounded-md text-primary-color hover:bg-primary-color hover:text-white"
                 onClick={() => setShowEditModal(false)}
               >
                 Discard

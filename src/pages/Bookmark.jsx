@@ -15,7 +15,7 @@ export const Bookmark = () => {
       <Navbar />
       <div className="flex">
         <Sidenav />
-        <div className="min-h-screen bg-primary-lightest py-5 mx-5 relative left-[15%] w-[65%] flex flex-col items-center rounded-xl lg:left-[30%] lg:w-[65%] md:left-0 md:w-full md:pb-[110px]">
+        <div className="min-h-screen bg-primary-lightest py-5 mx-5 relative left-[15%] w-[65%] flex flex-col items-center rounded-xl lg:left-[30%] lg:w-[65%] md:left-0 md:w-full md:pb-[110px] dark:bg-dark-light">
           <h1 className="text-2xl font-bold mb-5 underline decoration-blue-400">
             Bookmarks
           </h1>

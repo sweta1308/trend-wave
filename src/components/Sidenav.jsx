@@ -18,7 +18,7 @@ export const Sidenav = () => {
       {showModal && (
         <NewPost showModal={showModal} setShowModal={setShowModal} />
       )}
-      <div className="bg-white px-4 pr-3 pt-5 text-left md:text-center min-h-screen fixed w-[15%] xl:text-[14px] lg:px-2 lg:text-[16px] md:flex md:justify-evenly md:w-full md:min-h-0 md:bottom-0 md:z-30 md:pt-2.5 md:py-1 md:pb-3.5 xs:text-sm">
+      <div className="bg-white px-4 pr-3 pt-5 text-left md:text-center min-h-screen fixed w-[15%] xl:text-[14px] lg:px-2 lg:text-[16px] md:flex md:justify-evenly md:w-full md:min-h-0 md:bottom-0 md:z-30 md:pt-2.5 md:py-1 md:pb-3.5 xs:text-sm dark:bg-dark-mode dark:text-white">
         <NavLink
           style={getStyles}
           className="block py-4 cursor-pointer md:px-5 md:py-2 xs:px-2 hover:text-primary-color pl-10 xl:pl-5 md:text-xs"

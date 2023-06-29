@@ -11,7 +11,7 @@ export const EditDeleteModal = ({
 }) => {
   const { authState } = useAuth();
   return (
-    <div className="text-sm bg-white p-3 w-[150px] shadow-lg absolute right-2 top-12">
+    <div className="text-sm bg-white p-3 w-[150px] shadow-lg absolute right-2 top-12 dark:bg-dark-mode dark:shadow-gray-700">
       <p
         onClick={() => {
           handleCopyLink(postId);

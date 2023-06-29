@@ -25,7 +25,7 @@ export const FollowCount = ({ arr, setShowModal, showModal }) => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <div style={{ ...style }} className="bg-primary-lightest rounded-lg p-[20px]">
+        <div style={{ ...style }} className="bg-primary-lightest rounded-lg p-[20px] dark:bg-dark-light dark:text-white">
           <div className="flex justify-between items-center pb-[10px]">
             <p className="font-bold">{showModal.type}</p>
             <i

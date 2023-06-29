@@ -31,7 +31,10 @@ export const Avatar = ({
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <div className="z-50 bg-white p-[20px] rounded-lg" style={{ ...style }}>
+      <div
+        className="z-50 bg-white p-[20px] rounded-lg dark:bg-dark-mode dark:text-white"
+        style={{ ...style }}
+      >
         <div className="flex items-center justify-between p-[30px]">
           <h1 className="font-bold text-3xl">Avatars</h1>
           <i

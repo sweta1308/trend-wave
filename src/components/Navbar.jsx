@@ -14,7 +14,7 @@ export const Navbar = () => {
   const [showSearchModal, setShowSearchModal] = useState(false);
   const navigate = useNavigate();
   return (
-    <div className="bg-white shadow-sm sticky top-0 z-30">
+    <div className="bg-white shadow-sm sticky top-0 z-30 dark:bg-dark-mode dark:text-white dark:shadow-white">
       <div className="flex justify-between items-center px-14  sm:px-3">
         {showSearchModal && (
           <SearchModal
@@ -39,7 +39,7 @@ export const Navbar = () => {
             onChange={(e) => {
               setsearchInput(e.target.value);
             }}
-            className="p-[10px] outline-none text-sm w-[350px] lg:w-[200px]"
+            className="p-[10px] outline-none text-sm w-[350px] lg:w-[200px] dark:bg-dark-mode"
           />
         </div>
 

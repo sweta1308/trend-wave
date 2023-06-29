@@ -55,7 +55,7 @@ export const Login = () => {
               value={userLoginDetails.username}
               id="username"
               placeholder="adarshbalika"
-              className="mb-6 w-full border border-solid border-gray-600 rounded text-xs p-2"
+              className="mb-6 w-full border border-solid border-gray-600 rounded text-xs p-2 dark:bg-dark-mode"
             />
 
             <label for="password" className="mt-3">
@@ -74,7 +74,7 @@ export const Login = () => {
               required
               id="password"
               placeholder={isPasswordVisible ? "password" : "********"}
-              className="mb-6 w-full border border-solid border-gray-600 rounded text-xs p-2"
+              className="mb-6 w-full border border-solid border-gray-600 rounded text-xs p-2 dark:bg-dark-mode"
             />
             {isPasswordVisible ? (
               <i

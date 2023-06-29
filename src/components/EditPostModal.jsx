@@ -36,7 +36,10 @@ export const EditPost = ({ userPost, setShowEditPostModal, editPostModal }) => {
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <div className="bg-white p-[20px] rounded-lg" style={{ ...style }}>
+      <div
+        className="bg-white p-[20px] rounded-lg dark:bg-dark-mode dark:text-white"
+        style={{ ...style }}
+      >
         <h1 className="font-bold text-lg m-[10px]">EDIT POST</h1>
         {postValue?.content && (
           <textarea
@@ -45,7 +48,7 @@ export const EditPost = ({ userPost, setShowEditPostModal, editPostModal }) => {
             onChange={(e) =>
               setPostValue({ ...postValue, content: e.target.value })
             }
-            className="p-[10px] resize-none border-none outline-none"
+            className="p-[10px] resize-none border-none outline-none dark:bg-dark-mode"
           ></textarea>
         )}
 

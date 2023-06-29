@@ -16,7 +16,7 @@ export const RightNav = () => {
       ?.followers.some((user) => user._id === authState?.user?._id);
 
   return (
-    <div className="fixed left-[83%] pl-10 xl:pl-5 px-3 py-5 text-center min-h-screen lg:hidden">
+    <div className="fixed left-[83%] pl-10 xl:pl-5 px-3 py-5 text-center min-h-screen lg:hidden dark:text-white">
       <h1 className="text-left font-bold mb-5 ">Suggestions for you</h1>
 
       {userLoading ? (
