@@ -42,7 +42,7 @@ export const Avatar = ({
             className="fa-solid fa-xmark cursor-pointer text-lg hover:text-primary-color"
           ></i>
         </div>
-        <div className="flex flex-wrap">
+        <div className="flex flex-wrap justify-center">
           {avatar
             ?.filter((image) => image !== authState?.user?.avatarUrl)
             .map((avatar) => (
