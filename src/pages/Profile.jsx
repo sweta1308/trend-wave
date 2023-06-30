@@ -134,7 +134,7 @@ export const Profile = () => {
                     rel="noreferrer"
                   >
                     <i class="fa-solid fa-link w-[60px] text-center"></i>
-                    {userData?.website}
+                    {userData?.username}.com
                   </a>
                 )}
 
