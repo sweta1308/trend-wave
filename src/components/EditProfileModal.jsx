@@ -62,15 +62,35 @@ export const EditProfile = ({ userObj, setShowEditModal, showEditModal }) => {
               className="w-[100px] h-[100px] m-auto rounded-full"
             />
 
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                setShowAvatarModal(true);
-              }}
-              className="bg-primary-color text-white my-[6px] mb-[20px] p-[7px] hover:bg-primary-dark"
-            >
-              Update Avatar
-            </button>
+            <div className="flex justify-around items-center my-[10px]">
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  setShowAvatarModal(true);
+                }}
+                className="bg-primary-color rounded-lg text-white my-[6px] mb-[20px] p-[7px] hover:bg-primary-dark"
+              >
+                Update Avatar
+              </button>
+
+              <label>
+                <p className="cursor-pointer p-[7px] border border-primary-color rounded-md text-primary-color hover:bg-primary-color hover:text-white">
+                  Select From Photos
+                </p>
+                <input
+                  className="hidden"
+                  type="file"
+                  accept="/image*"
+                  onChange={(e) => {
+                    setUserValue({
+                      ...userValue,
+                      avatarUrl: URL.createObjectURL(e.target.files[0]),
+                    });
+                  }}
+                />
+              </label>
+            </div>
+
             <div className="flex xs:flex-col">
               <div className="xs:mb-[10px]">
                 <label className="xs:mr-[10px]" for="first-name">
