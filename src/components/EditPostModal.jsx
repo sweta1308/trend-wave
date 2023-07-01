@@ -59,7 +59,7 @@ export const EditPost = ({ userPost, setShowEditPostModal, editPostModal }) => {
               className="fa-solid fa-circle-xmark cursor-pointer absolute right-[25px] top-[10px] text-lg hover:text-primary-color"
             ></i>
             <img
-              className="w-[300px] m-auto"
+              className="w-[300px] h-[300px] m-auto"
               src={postValue?.imageUrl}
               alt="post"
             />
