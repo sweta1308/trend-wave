@@ -32,7 +32,6 @@ export const PostDetails = () => {
       });
       if (status === 200 || status === 201) {
         setPostDetails(data?.post);
-        // setPostLoading(false);
       }
     } catch (e) {
       console.log(e);
