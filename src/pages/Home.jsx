@@ -4,21 +4,16 @@ import { RightNav } from "../components/RightNav";
 import { Sidenav } from "../components/Sidenav";
 import { useAuth } from "../context/auth-context";
 import { usePost } from "../context/post-context";
-import { useUser } from "../context/user-context";
 import { DisplayPost } from "../components/DisplayPost";
 import { FilterComponent } from "../components/FilterComponent";
 
 export const Home = () => {
   document.title = "Trend Wave | Feed";
   const { postState } = usePost();
-  const { userState } = useUser();
   const { authState } = useAuth();
   let userFeed = [];
-  const loggedInUser = userState?.find(
-    ({ _id }) => _id === authState?.user?._id
-  );
   const followFeedPost = postState?.post?.filter(({ username }) => {
-    const followUsernameArr = loggedInUser?.following?.map(
+    const followUsernameArr = authState?.user?.following?.map(
       ({ username }) => username
     );
     return followUsernameArr?.includes(username);
@@ -28,7 +23,7 @@ export const Home = () => {
     ...userFeed,
     ...followFeedPost,
     ...postState?.post?.filter(
-      ({ username }) => username === loggedInUser?.username
+      ({ username }) => username === authState?.user?.username
     ),
   ];
 
