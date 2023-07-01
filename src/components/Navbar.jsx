@@ -30,7 +30,7 @@ export const Navbar = () => {
         />
         <div
           onClick={() => setShowSearchModal(true)}
-          className="border border-gray-400 flex items-center rounded-lg md:hidden"
+          className="shadow-lg flex items-center rounded-lg md:hidden dark:shadow-sm dark:shadow-white"
         >
           <i className="fa-solid fa-magnifying-glass mx-[10px]"></i>
           <input
@@ -39,7 +39,7 @@ export const Navbar = () => {
             onChange={(e) => {
               setsearchInput(e.target.value);
             }}
-            className="p-[10px] outline-none text-sm w-[350px] lg:w-[200px] dark:bg-dark-mode"
+            className="p-[10px] outline-none text-sm w-[300px] rounded-lg lg:w-[200px] dark:bg-dark-mode"
           />
         </div>
 
