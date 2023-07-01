@@ -24,16 +24,16 @@ export const Sidenav = () => {
           className="block py-4 cursor-pointer md:px-5 md:py-2 xs:px-2 hover:text-primary-color pl-10 xl:pl-5 md:text-xs"
           to="/"
         >
-          <i className="fa-solid fa-grip md:text-base"></i>{" "}
-          <span className="ml-3 font-medium md:block md:ml-0">Feed</span>
+          <i className="fa-solid fa-grip md:text-base w-[22px]"></i>{" "}
+          <span className="font-medium md:block">Feed</span>
         </NavLink>
         <NavLink
           style={getStyles}
           className="block py-4 cursor-pointer md:py-2 md:px-5 xs:px-2 hover:text-primary-color pl-10 xl:pl-5 md:text-xs"
           to="/explore"
         >
-          <i className="fa-regular fa-compass md:text-base"></i>{" "}
-          <span className="ml-3 font-medium md:block md:ml-0">Explore</span>
+          <i className="fa-regular fa-compass md:text-base w-[22px]"></i>{" "}
+          <span className="font-medium md:block">Explore</span>
         </NavLink>
 
         <p
@@ -41,30 +41,30 @@ export const Sidenav = () => {
           className="hidden py-4 cursor-pointer md:block md:py-2 md:px-5 xs:px-2 hover:text-primary-color pl-10 xl:pl-5 md:text-xs"
         >
           <i className="fa-solid fa-plus md:text-base"></i>
-          <span className="ml-3 font-medium md:block md:ml-0">Create Post</span>
+          <span className="ml-3 font-medium md:block">Create Post</span>
         </p>
         <NavLink
           style={getStyles}
           className="relative block py-4 cursor-pointer md:py-2 md:px-5 xs:px-2 hover:text-primary-color pl-10 xl:pl-5 md:text-xs"
           to="/bookmark"
         >
-          <i className="fa-regular fa-bookmark md:text-base"></i>
-          <span className="ml-3 font-medium md:block md:ml-0">Bookmarks </span>
+          <i className="fa-regular fa-bookmark md:text-base w-[25px]"></i>
+          <span className="font-medium md:block">Bookmarks </span>
         </NavLink>
         <p
           className="block py-4 cursor-pointer md:py-2 md:px-5 xs:px-2 hover:text-primary-color pl-10 xl:pl-5 md:text-xs"
           onClick={() => userLogout()}
         >
-          <i className="fa-solid fa-arrow-right-from-bracket md:text-base"></i>{" "}
-          <span className="ml-3 font-medium md:block md:ml-0">Log Out</span>
+          <i className="fa-solid fa-arrow-right-from-bracket md:text-base w-[22px]"></i>{" "}
+          <span className="font-medium md:block">Log Out</span>
         </p>
 
         <p
           onClick={() => setShowModal(true)}
           className="block py-4 cursor-pointer md:hidden md:py-2 md:px-5 xs:px-2 hover:text-primary-color pl-10 xl:pl-5 md:text-xs"
         >
-          <i className="fa-solid fa-plus md:text-base"></i>
-          <span className="ml-3 font-medium md:block md:ml-0">Create Post</span>
+          <i className="fa-solid fa-plus w-[25px] md:text-base"></i>
+          <span className="font-medium md:block">Create Post</span>
         </p>
       </div>
     </>
