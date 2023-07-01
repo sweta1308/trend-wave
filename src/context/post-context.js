@@ -1,5 +1,5 @@
 import { useReducer, useContext, createContext, useEffect } from "react";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import axios from "axios";
 import { useAuth } from "./auth-context";
 import { postReducer } from "../reducer/post-reducer";
@@ -43,9 +43,10 @@ export const PostProvider = ({ children }) => {
       );
       if (status === 201) {
         postDispatch({ type: "GET_POST", payload: data?.posts });
+        toast.success("Post created successfully!");
       }
     } catch (e) {
-      console.log(e);
+      toast.error(e.response.data.errors[0]);
     }
   };
 
@@ -59,7 +60,7 @@ export const PostProvider = ({ children }) => {
         postDispatch({ type: "USER_POST", payload: data?.posts });
       }
     } catch (e) {
-      console.log(e);
+      toast.error(e.response.data.errors[0]);
     }
   };
 
@@ -72,10 +73,11 @@ export const PostProvider = ({ children }) => {
       });
       if (status === 200 || status === 201) {
         postDispatch({ type: "GET_POST", payload: data?.posts });
+        toast.success("Post Liked");
         return data.posts.find((post) => post._id === postId);
       }
     } catch (e) {
-      console.log(e);
+      toast.error(e.response.data.errors[0]);
     }
   };
 
@@ -88,9 +90,10 @@ export const PostProvider = ({ children }) => {
       });
       if (status === 200 || status === 201) {
         postDispatch({ type: "GET_POST", payload: data?.posts });
+        toast.success("Post unliked");
       }
     } catch (e) {
-      console.log(e);
+      toast.error(e.response.data.errors[0]);
     }
   };
 
@@ -103,9 +106,10 @@ export const PostProvider = ({ children }) => {
       );
       if (status === 201) {
         postDispatch({ type: "GET_POST", payload: data?.posts });
+        toast.success("Post edited successfully!");
       }
     } catch (e) {
-      console.log(e);
+      toast.error(e.response.data.errors[0]);
     }
   };
 
@@ -119,9 +123,10 @@ export const PostProvider = ({ children }) => {
       if (status === 200 || status === 201) {
         postDispatch({ type: "GET_POST", payload: data?.posts });
         fromSinglePost && navigate("/");
+        toast.success("Post deleted!");
       }
     } catch (e) {
-      console.log(e);
+      toast.error(e.response.data.errors[0]);
     }
   };
 

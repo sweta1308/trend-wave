@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
 import { useLocation, useNavigate } from "react-router";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import axios from "axios";
 import { authReducer } from "../reducer/auth-reducer";
 
@@ -29,13 +29,12 @@ export const AuthProvider = ({ children }) => {
       if (status === 200) {
         authDispatch({ type: "SET_USER", payload: data?.foundUser });
         authDispatch({ type: "SET_TOKEN", payload: data?.encodedToken });
-
         navigate(location?.state?.from?.pathname || "/");
         localStorage.setItem(
           "data",
           JSON.stringify({ user: data?.foundUser, token: data?.encodedToken })
         );
-        toast.success("Successfully Logged In!");
+        toast.success(`Hello ${data?.foundUser?.firstName}, Welcome back!`);
       }
     } catch (e) {
       toast.error(e.response.data.errors[0]);
@@ -57,7 +56,7 @@ export const AuthProvider = ({ children }) => {
           "data",
           JSON.stringify({ user: data?.createdUser, token: data?.encodedToken })
         );
-        toast.success("Successfully Logged In!");
+        toast.success(`Hello ${data?.createdUser?.firstName}, Welcome!`);
       }
     } catch (e) {
       toast.error(e.response.data.errors[0]);

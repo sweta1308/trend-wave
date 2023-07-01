@@ -5,7 +5,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import axios from "axios";
 import { userReducer } from "../reducer/user-reducer";
 import { useAuth } from "./auth-context";
@@ -43,9 +43,11 @@ export const UserProvider = ({ children }) => {
       if (status === 200 || status === 201) {
         userDispatch({ type: "UPDATE_USER", payload: data?.followUser });
         userDispatch({ type: "UPDATE_USER", payload: data?.user });
+        authDispatch({ type: "SET_USER", payload: data?.user });
+        toast.success("Followed!");
       }
     } catch (e) {
-      console.log(e);
+      toast.error(e.response.data.errors[0]);
     }
   };
 
@@ -59,9 +61,11 @@ export const UserProvider = ({ children }) => {
       if (status === 200 || status === 201) {
         userDispatch({ type: "UPDATE_USER", payload: data?.followUser });
         userDispatch({ type: "UPDATE_USER", payload: data?.user });
+        authDispatch({ type: "SET_USER", payload: data?.user });
+        toast.success("Unfollowed!");
       }
     } catch (e) {
-      console.log(e);
+      toast.error(e.response.data.errors[0]);
     }
   };
 
@@ -75,9 +79,10 @@ export const UserProvider = ({ children }) => {
       if (status === 201) {
         userDispatch({ type: "UPDATE_USER", payload: data?.user });
         authDispatch({ type: "SET_USER", payload: data?.user });
+        toast.success("Updated profile successfully!");
       }
-    } catch (error) {
-      console.error(error);
+    } catch (e) {
+      toast.error(e.response.data.errors[0]);
     }
   };
 
@@ -90,6 +95,7 @@ export const UserProvider = ({ children }) => {
       <UserContext.Provider
         value={{
           userState,
+          userDispatch,
           userLoading,
           followUser,
           unfollowUser,

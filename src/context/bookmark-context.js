@@ -1,4 +1,5 @@
 import { useReducer, useContext, createContext, useEffect } from "react";
+import { toast } from "react-hot-toast";
 import axios from "axios";
 import { bookmarkReducer } from "../reducer/bookmark-reducer";
 import { useAuth } from "./auth-context";
@@ -29,7 +30,7 @@ export const BookmarkProvider = ({ children }) => {
         bookmarkDispatch({ type: "BOOKMARK_LOADING", payload: false });
       }
     } catch (e) {
-      console.log(e);
+      toast.error(e.response.data.errors[0]);
     }
   };
 
@@ -44,9 +45,10 @@ export const BookmarkProvider = ({ children }) => {
       if (status === 200 || status === 201) {
         bookmarkDispatch({ type: "SET_BOOKMARK", payload: data?.bookmarks });
         bookmarkDispatch({ type: "BOOKMARK_LOADING", payload: false });
+        toast.success("Added to bookmark!");
       }
     } catch (e) {
-      console.log(e);
+      toast.error(e.response.data.errors[0]);
     }
   };
 
@@ -61,9 +63,10 @@ export const BookmarkProvider = ({ children }) => {
       if (status === 200 || status === 201) {
         bookmarkDispatch({ type: "SET_BOOKMARK", payload: data?.bookmarks });
         bookmarkDispatch({ type: "BOOKMARK_LOADING", payload: false });
+        toast.success("Removed from bookmark!");
       }
     } catch (e) {
-      console.log(e);
+      toast.error(e.response.data.errors[0]);
     }
   };
 

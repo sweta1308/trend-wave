@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useContext, createContext } from "react";
+import { toast } from "react-hot-toast";
 import { useAuth } from "./auth-context";
 import { usePost } from "./post-context";
 
@@ -18,9 +19,10 @@ export const CommentProvider = ({ children }) => {
       );
       if (status === 201 || status === 200) {
         postDispatch({ type: "GET_POST", payload: data?.posts });
+        toast.success("Added comment!");
       }
     } catch (e) {
-      console.log(e);
+      toast.error(e.response.data.errors[0]);
     }
   };
 
@@ -33,9 +35,10 @@ export const CommentProvider = ({ children }) => {
       );
       if (status === 201 || status === 200) {
         postDispatch({ type: "GET_POST", payload: data?.posts });
+        toast.success("Comment edited!");
       }
     } catch (e) {
-      console.log(e);
+      toast.error(e.response.data.errors[0]);
     }
   };
 
@@ -48,9 +51,10 @@ export const CommentProvider = ({ children }) => {
       });
       if (status === 201 || status === 200) {
         postDispatch({ type: "GET_POST", payload: data?.posts });
+        toast.success("Comment removed!");
       }
     } catch (e) {
-      console.log(e);
+      toast.error(e.response.data.errors[0]);
     }
   };
 
