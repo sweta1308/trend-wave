@@ -4,6 +4,8 @@ const header =
   "https://res.cloudinary.com/sweta-agarwalla/image/upload/v1686295261/undraw_social_networking_re_i1ex_o4fw8j.svg";
 const login =
   "https://res.cloudinary.com/sweta-agarwalla/image/upload/v1686298938/Hand-taking-shot-of-aesthetic-wall-background_czpoiv.jpg";
+const error404 =
+  "https://res.cloudinary.com/sweta-agarwalla/image/upload/v1688189080/6363147-removebg-preview_s5o7ju.png";
 
 const attireBanner =
   "https://res.cloudinary.com/sweta-agarwalla/image/upload/v1686548483/My_project-1_3_hwgedx.png";
@@ -11,7 +13,7 @@ const blackDress =
   "https://res.cloudinary.com/sweta-agarwalla/image/upload/v1686550126/xl-vrro-24-black-drs-ifr-19-drs-black-color-one-piece-sexy-one-original-imagdfd7bjhzsgvn_anxtse.jpg";
 const post =
   "https://res.cloudinary.com/sweta-agarwalla/image/upload/v1686556867/photo-1557002666-513ca8eaa3c8_ozpdgt.jpg";
-const girlImage = 
+const girlImage =
   "https://res.cloudinary.com/sweta-agarwalla/image/upload/v1686594530/f5c4feb96004b7063cd42c5a96f0d9fe--bungalows-_czg2xq.jpg";
 
 const girlAvatar1 =
@@ -33,6 +35,7 @@ export {
   logo,
   header,
   login,
+  error404,
   attireBanner,
   blackDress,
   post,
