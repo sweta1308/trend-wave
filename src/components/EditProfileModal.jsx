@@ -62,7 +62,7 @@ export const EditProfile = ({ userObj, setShowEditModal, showEditModal }) => {
               className="w-[100px] h-[100px] m-auto rounded-full"
             />
 
-            <div className="flex justify-around items-center my-[10px]">
+            <div className="flex justify-around my-[10px]">
               <button
                 onClick={(e) => {
                   e.preventDefault();
@@ -74,8 +74,8 @@ export const EditProfile = ({ userObj, setShowEditModal, showEditModal }) => {
               </button>
 
               <label>
-                <p className="cursor-pointer p-[7px] border border-primary-color rounded-md text-primary-color hover:bg-primary-color hover:text-white">
-                  Select From Photos
+                <p className="cursor-pointer my-[6px] p-[7px] border border-primary-color rounded-lg text-primary-color hover:bg-primary-color hover:text-white">
+                  Upload From Photos
                 </p>
                 <input
                   className="hidden"
