@@ -15,18 +15,20 @@ import { EditProfile } from "../components/EditProfileModal";
 export const Profile = () => {
   document.title = "Trend Wave | Profile";
   const { username } = useParams();
-  const { authState } = useAuth();
+  const { authState, userLogout } = useAuth();
   const { postState, getUserPost } = usePost();
-  const { userState, followUser, unfollowUser, userLoading } = useUser();
+  const { userState, followUser, unfollowUser } = useUser();
   const [userData, setUserData] = useState({});
   const [showModal, setShowModal] = useState({
     show: false,
     type: "",
   });
   const [showEditModal, setShowEditModal] = useState(false);
+  const [usersLoading, setUsersLoading] = useState(false);
 
   const getUserDetails = async () => {
     try {
+      setUsersLoading(true);
       const { data, status } = await axios({
         method: "GET",
         url: `/api/users/${username}`,
@@ -34,6 +36,7 @@ export const Profile = () => {
       if (status === 200 || status === 201) {
         setUserData(data?.user);
         getUserPost(username);
+        setUsersLoading(false);
       }
     } catch (e) {
       console.log(e);
@@ -43,7 +46,7 @@ export const Profile = () => {
   useEffect(() => {
     getUserDetails();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [username, userData]);
+  }, [username, userState]);
 
   const isFollowed = (userId) =>
     userState
@@ -77,7 +80,7 @@ export const Profile = () => {
         <div className="flex">
           <Sidenav />
           <div className="min-h-screen bg-primary-lightest py-5 mx-5 relative left-[15%] w-[65%] flex flex-col items-center rounded-xl lg:left-[30%] lg:w-[65%] md:left-0 md:w-full  md:pb-[110px] dark:bg-dark-light">
-            {userLoading ? (
+            {usersLoading ? (
               <PulseLoader color="var(--primary-color)" size={30} />
             ) : (
               <div className="w-[600px] lg:w-[500px] md:w-[380px] xs:w-[320px]">
@@ -96,12 +99,16 @@ export const Profile = () => {
                   </div>
 
                   {userData?.username === authState?.user?.username ? (
-                    <button
-                      onClick={() => setShowEditModal(true)}
-                      className="px-4 py-2 hover:text-primary-color rounded-lg"
-                    >
-                      <i className="fa-solid fa-pen fa-md"></i>
-                    </button>
+                    <div className="px-4 py-2 w-[90px] flex justify-between rounded-lg">
+                      <i
+                        onClick={() => setShowEditModal(true)}
+                        className="fa-solid fa-pen fa-md cursor-pointer hover:text-primary-color"
+                      ></i>
+                      <i
+                        onClick={() => userLogout()}
+                        className="fa-solid fa-arrow-right-from-bracket cursor-pointer hover:text-primary-color"
+                      ></i>
+                    </div>
                   ) : isFollowed(userData?._id) ? (
                     <button
                       onClick={() => unfollowUser(userData?._id)}
