@@ -2,14 +2,12 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import { logo } from "../assets";
 import { useAuth } from "../context/auth-context";
-import { usePost } from "../context/post-context";
 import { SearchModal } from "./SearchModal";
 import { useTheme } from "../context/theme-context";
 
 export const Navbar = () => {
   const { isDarkMode, setIsDarkMode } = useTheme();
-  const { authState } = useAuth();
-  const { getUserPost } = usePost();
+  const { userLogout } = useAuth();
   const [searchInput, setsearchInput] = useState("");
   const [showSearchModal, setShowSearchModal] = useState(false);
   const navigate = useNavigate();
@@ -43,7 +41,7 @@ export const Navbar = () => {
           />
         </div>
 
-        <div className="flex justify-around items-center w-56 xs:w-44">
+        <div className="flex justify-around items-center w-24 xs:w-18">
           {isDarkMode ? (
             <i
               onClick={() => setIsDarkMode((prev) => !prev)}
@@ -56,20 +54,10 @@ export const Navbar = () => {
             ></i>
           )}
 
-          <div
-            onClick={() => {
-              getUserPost(authState?.user?.username);
-              navigate(`/profile/${authState?.user?.username}`);
-            }}
-            className="flex items-center cursor-pointer hover:underline hover:decoration-blue-400 hover:text-primary-color sm:text-[14px]"
-          >
-            <p>{`${authState?.user?.firstName} ${authState?.user?.lastName}`}</p>
-            <img
-              src={authState?.user?.avatarUrl}
-              alt="avatar"
-              className="w-[35px] h-[35px] ml-2 rounded-full"
-            />
-          </div>
+          <i
+            onClick={() => userLogout()}
+            className="fa-solid fa-arrow-right-from-bracket cursor-pointer hover:text-primary-color"
+          ></i>
         </div>
       </div>
 
