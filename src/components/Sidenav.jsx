@@ -1,10 +1,10 @@
 import { NavLink } from "react-router-dom";
-import { useAuth } from "../context/auth-context";
 import { useState } from "react";
 import { NewPost } from "./NewPost";
+import { useAuth } from "../context/auth-context";
 
 export const Sidenav = () => {
-  const { userLogout } = useAuth();
+  const { authState } = useAuth();
   const [showModal, setShowModal] = useState(false);
 
   const getStyles = ({ isActive }) => ({
@@ -51,13 +51,15 @@ export const Sidenav = () => {
           <i className="fa-regular fa-bookmark md:text-base w-[25px]"></i>
           <span className="font-medium md:block">Bookmarks </span>
         </NavLink>
-        <p
-          className="block py-4 cursor-pointer md:py-2 md:px-5 xs:px-2 hover:text-primary-color pl-10 xl:pl-5 md:text-xs"
-          onClick={() => userLogout()}
+
+        <NavLink
+          style={getStyles}
+          className="relative block py-4 cursor-pointer md:py-2 md:px-5 xs:px-2 hover:text-primary-color pl-10 xl:pl-5 md:text-xs"
+          to={`/profile/${authState?.user?.username}`}
         >
-          <i className="fa-solid fa-arrow-right-from-bracket md:text-base w-[22px]"></i>{" "}
-          <span className="font-medium md:block">Log Out</span>
-        </p>
+          <i className="fa-regular fa-user md:text-base w-[25px]"></i>
+          <span className="font-medium md:block">Profile </span>
+        </NavLink>
 
         <p
           onClick={() => setShowModal(true)}
