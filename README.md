@@ -3,6 +3,10 @@
 [Trend wave](https://trend-wave.vercel.app/) - A social media app where you can connect with your friends and family and share pictures.
 
 
+https://github.com/sweta1308/trend-wave/assets/105535990/2d6cfeee-54c3-48a6-83df-a0299f48710a
+
+
+
 ## Pages and Features
 
 ### Home Page
