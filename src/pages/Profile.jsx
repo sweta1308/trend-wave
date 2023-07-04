@@ -46,7 +46,7 @@ export const Profile = () => {
   useEffect(() => {
     getUserDetails();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [username, userState]);
+  }, [username, userState, postState?.post]);
 
   const isFollowed = (userId) =>
     userState

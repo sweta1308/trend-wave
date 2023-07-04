@@ -87,8 +87,8 @@ export const UserProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    getUserData();
-  }, []);
+    authState?.token && getUserData();
+  }, [authState?.token]);
 
   return (
     <>
