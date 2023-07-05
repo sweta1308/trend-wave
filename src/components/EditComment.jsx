@@ -4,7 +4,12 @@ import Picker from "@emoji-mart/react";
 import { useState } from "react";
 import { useComment } from "../context/comment-context";
 
-export const EditComment = ({ showEdit, setShowEdit, comment, postId }) => {
+export const EditComment = ({
+  commentData,
+  setCommentData,
+  comment,
+  postId,
+}) => {
   const { editComment } = useComment();
   const [showEmoji, setShowEmoji] = useState(false);
   const [commentValue, setCommentValue] = useState({
@@ -23,12 +28,15 @@ export const EditComment = ({ showEdit, setShowEdit, comment, postId }) => {
   };
   return (
     <Modal
-      open={showEdit}
-      onClose={() => setShowEdit(false)}
+      open={commentData}
+      onClose={() => setCommentData(false)}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <div className="bg-white p-[20px] rounded-lg dark:bg-dark-mode dark:text-white" style={{ ...style }}>
+      <div
+        className="bg-white p-[20px] rounded-lg dark:bg-dark-mode dark:text-white"
+        style={{ ...style }}
+      >
         <h1 className="font-bold text-lg mb-[5px]">EDIT COMMENT</h1>
         <textarea
           cols={10}
@@ -75,7 +83,7 @@ export const EditComment = ({ showEdit, setShowEdit, comment, postId }) => {
           <button
             onClick={() => {
               editComment(postId, commentValue?._id, commentValue?.text);
-              setShowEdit(false);
+              setCommentData(false);
             }}
             className="bg-primary-color text-white px-[12px] py-[7px] rounded-lg mr-[15px] hover:bg-primary-dark"
           >
@@ -83,7 +91,7 @@ export const EditComment = ({ showEdit, setShowEdit, comment, postId }) => {
           </button>
           <button
             className="border border-primary-color rounded-lg text-primary-color px-[12px] py-[7px] hover:bg-primary-color hover:text-white"
-            onClick={() => setShowEdit(false)}
+            onClick={() => setCommentData("")}
           >
             Discard
           </button>

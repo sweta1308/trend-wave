@@ -22,7 +22,7 @@ export const PostDetails = () => {
   const { getUserPost, postState } = usePost();
   const { addComments, deleteComment } = useComment();
   const [commentInput, setCommentInput] = useState("");
-  const [showEdit, setShowEdit] = useState(false);
+  const [commentData, setCommentData] = useState(false);
 
   const getPostDetails = async () => {
     try {
@@ -86,12 +86,14 @@ export const PostDetails = () => {
                         key={comment?._id}
                         className="bg-white px-5 py-px pt-2 rounded-lg w-[600px] lg:w-[500px] md:w-[350px] xs:w-[300px] dark:bg-dark-mode"
                       >
-                        <EditComment
-                          setShowEdit={setShowEdit}
-                          showEdit={showEdit}
-                          comment={comment}
-                          postId={postDetails?._id}
-                        />
+                        {commentData === comment._id && (
+                          <EditComment
+                            setCommentData={setCommentData}
+                            commentData={commentData}
+                            comment={comment}
+                            postId={postDetails?._id}
+                          />
+                        )}
                         <div
                           className="flex items-center cursor-pointer"
                           onClick={() => {
@@ -117,7 +119,7 @@ export const PostDetails = () => {
                             userComment?.username && (
                             <div>
                               <i
-                                onClick={() => setShowEdit(true)}
+                                onClick={() => setCommentData(comment?._id)}
                                 className="fa-solid fa-pen fa-md mr-[15px] cursor-pointer hover:text-primary-color"
                               ></i>
                               <i
