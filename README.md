@@ -55,7 +55,7 @@ https://github.com/sweta1308/trend-wave/assets/105535990/2d6cfeee-54c3-48a6-83df
 * Loaders
 * Responsive
 
-## Teach Stack
+## Tech Stack
 * React JS
 * React Router v6
 * React useContext + useReducer
